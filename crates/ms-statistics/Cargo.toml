@@ -1,0 +1,8 @@
+[package]
+name = "ms-statistics"
+version = "0.1.0"
+description = "Statistics module for MasScholar"
+authors = ["Kaifuny"]
+edition = "2021"
+
+[dependencies]
