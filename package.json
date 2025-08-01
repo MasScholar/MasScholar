@@ -1,0 +1,11 @@
+{
+  "name": "masscholar",
+  "version": "1.0.0",
+  "description": "",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    
+  },
+  "author": "Kaifuny <kaifuny.github@gmail.com>",
+  "license": "MIT"
+}
