@@ -19,9 +19,10 @@
     "**/node_modules": true,
     "**/.git": true,
     "**/yarn.lock": true,
-    ".rust-analyzer": true,
+    "**/.rust-analyzer": true,
     "**/.turbo": true,
-    "Cargo.lock": true,
-    "crates/ohyo-tauri/gen": true
+    "**/Cargo.lock": true,
+    "**/tsconfig.node.tsbuildinfo": true,
+    "**/tsconfig.tsbuildinfo": true,
   },
 }
