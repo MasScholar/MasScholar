@@ -16,13 +16,13 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     "**/dist": true,
-    "**/node_modules": true,
+    "**/node_modules": false,
     "**/.git": true,
-    "**/yarn.lock": true,
     "**/.rust-analyzer": true,
     "**/.turbo": true,
-    "**/Cargo.lock": true,
     "**/tsconfig.node.tsbuildinfo": true,
     "**/tsconfig.tsbuildinfo": true,
+    "**/.nuxt": true,
+    "**/.data": true,
   },
 }
