@@ -25,5 +25,5 @@
     "cleandep": "rm -rf node_modules target pnpm-lock.yaml && pnpm -r exec rm -rf node_modules"
   },
   "author": "Kaifuny <kaifuny.github@gmail.com>",
-  "license": "BSD-3-Clause"
+  "license": "AGPL-3.0-only"
 }

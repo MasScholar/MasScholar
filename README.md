@@ -4,7 +4,7 @@
 > 2025.08.01
 
 MasScholar 是一款专为 教学实验室、科研团队与跨学科项目 打造的统计分析与协作平台。
-集成桌面级应用体验与云端协作能力，旨在成为 SPSS® 和 SAS® 在教学与探索性数据分析场景下的现代可交互替代品。
+集成桌面级应用体验与云端协作能力，旨在成为 SPSS® 和 SAS® 在教学与探索性数据分析场景下的现代交互的可替代品。
 
 ## Quick Start For Developers
 
@@ -16,22 +16,22 @@ pnpm dev:app
 ## Structure
 
 ```bash
-├── apps
-  ├── app # Client App
-  ├── web # Portal / Blog / Docs / Manager
-├── crates
-  ├── ms-language-env # R / Python
-  ├── ms-simulation # Simulation
-  ├── ms-statistics # Statistics
-├── packages
-  ├── ms-agent # Ai Agent
-  ├── ms-chart # Chart
-  ├── ms-core  # Framework Core for Electron App
-  ├── ms-datasource # Data Source e.g. SQLite, MySQL, PostgreSQL, etc.
-  ├── ms-i18n # Internationalization
-  ├── ms-ui # Ui Component for Electron App / Web App
-├── vender
-  ├── something
+├── apps/
+  └── app # Client App
+  └── web # Portal / Blog / Docs / Manager
+├── crates/
+  └── ms-language-env # R / Python
+  └── ms-simulation # Simulation
+  └── ms-statistics # Statistics
+├── packages/
+  └── ms-agent # Ai Agent
+  └── ms-chart # Chart
+  └── ms-core  # Framework Core for Electron App
+  └── ms-datasource # Data Source e.g. SQLite, MySQL, PostgreSQL, etc.
+  └── ms-i18n # Internationalization
+  └── ms-ui # Ui Component for Electron App / Web App
+├── vender/
+  └── something third party
 ├── package.json
 ├── pnpm-workspace.yaml
 ├── README.md
@@ -52,3 +52,12 @@ pnpm dev:app
 | **8. 多变量分析**     | [ ]主成分分析（PCA）、[ ]因子分析、[ ]判别分析、[ ]聚类分析                   |
 | **9. 贝叶斯分析**     | [ ]贝叶斯回归、[ ]贝叶斯更新、[ ]贝叶斯因子检验                               |
 | **10. 模型构建/模拟** | [ ]自定义模型、[ ]最小二乘、[ ]多层线性模型、[ ]混合效应模型、[ ]蒙特卡洛模拟 |
+
+## 声明
+
+- 本项目遵循 [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) 开源协议。
+- SAS® is registered trademarks of The SAS Institute Inc.
+- SPSS® is registered trademarks of IBM Corp.
+- MATLAB® is a registered trademark of The MathWorks, Inc.
+- R® is a registered trademark of R Core Team.
+- Python® is a registered trademark of the Python Software Foundation.
