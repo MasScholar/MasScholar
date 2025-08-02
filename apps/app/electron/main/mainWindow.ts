@@ -3,6 +3,8 @@ import { BrowserWindow } from 'electron'
 async function createWindow() {
   const browserWindow = new BrowserWindow({
     show: false,
+    titleBarStyle: 'hidden',
+    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     webPreferences: {
       webviewTag: false,
     },

@@ -4,7 +4,8 @@
   "description": "",
   "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "dev:app": "pnpm --filter @masscholar/app run dev"
+    "dev:app": "pnpm --filter @masscholar/app run dev",
+    "add:component": "pnpm --filter @masscholar/ui add:component"
   },
   "author": "Kaifuny <kaifuny.github@gmail.com>",
   "license": "BSD-3-Clause"

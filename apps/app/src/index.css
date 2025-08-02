@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.electron-app-region {
+  app-region: drag;
+}

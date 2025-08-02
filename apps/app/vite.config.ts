@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import tailwindcss from '@tailwindcss/vite'
 import { VitePluginDoubleshot } from 'vite-plugin-doubleshot'
 
 // https://vite.dev/config/
@@ -12,9 +13,10 @@ export default defineConfig({
     vue(),
     vueJsx(),
     vueDevTools(),
+    tailwindcss(),
     VitePluginDoubleshot({
       type: 'electron',
-      main: 'dist/main/index.js',
+      main: 'dist/main/index.cjs',
       entry: 'electron/main/index.ts',
       outDir: 'dist/main',
       external: ['electron'],
