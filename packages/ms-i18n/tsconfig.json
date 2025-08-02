@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+  },
+  "include": [
+    "src/**/index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "buildOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "emitDeclarationOnly": true
+  }
+}

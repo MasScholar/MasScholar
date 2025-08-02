@@ -1,4 +1,8 @@
 {
+  "i18n-ally.localesPaths": [
+    "packages/ms-i18n/src/locales"
+  ],
+  "i18n-ally.keystyle": "nested",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json, env.d.ts",
@@ -9,5 +13,15 @@
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/yarn.lock": true,
+    ".rust-analyzer": true,
+    "**/.turbo": true,
+    "Cargo.lock": true,
+    "crates/ohyo-tauri/gen": true
+  },
 }
