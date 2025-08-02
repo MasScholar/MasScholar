@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "add:component": "pnpm dlx shadcn-vue@latest add"
+    "add:component": "pnpm dlx shadcn-vue@latest add",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.15.1",
@@ -25,15 +27,26 @@
     "zod": "^4.0.14"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.0",
+    "@storybook/addon-a11y": "^9.1.0",
+    "@storybook/addon-docs": "^9.1.0",
+    "@storybook/addon-onboarding": "^9.1.0",
+    "@storybook/addon-vitest": "^9.1.0",
+    "@storybook/vue3-vite": "^9.1.0",
     "@tailwindcss/vite": "^4.1.11",
     "@types/node": "^22.16.5",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
+    "storybook": "^9.1.0",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
     "vite-plugin-dts": "^4.5.4",
-    "vue-tsc": "^2.2.12"
+    "vue-tsc": "^2.2.12",
+    "vitest": "^3.2.4",
+    "@vitest/browser": "^3.2.4",
+    "playwright": "^1.54.2",
+    "@vitest/coverage-v8": "^3.2.4"
   },
   "exports": {
     ".": {

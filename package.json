@@ -11,6 +11,7 @@
   "scripts": {
     "dev:web": "pnpm --filter @masscholar/web run dev",
     "dev:app": "pnpm --filter @masscholar/app run dev",
+    "dev:storybook": "pnpm --filter @masscholar/ui run storybook",
     "build:ms-ui": "pnpm --filter @masscholar/ui run build",
     "add:component": "pnpm --filter @masscholar/ui add:component"
   },
