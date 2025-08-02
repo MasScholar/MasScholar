@@ -22,7 +22,7 @@ project_name.mslab
 ## File Structure
 
 ```bash
-MyProject.maslab/
+MyProject.mslab/
 ├── project.xml             # 主描述文件（核心元数据 + 结构）
 ├── history.xml             # 历史记录文件
 ├── toc.xml                 # 目录结构文件

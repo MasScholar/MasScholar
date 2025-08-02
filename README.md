@@ -17,19 +17,19 @@ pnpm dev:app
 
 ```bash
 ├── apps/
-  └── app # Client App
-  └── web # Portal / Blog / Docs / Manager
+  └── app                 # Client App
+  └── web                 # Portal / Blog / Docs / Manager
 ├── crates/
-  └── ms-language-env # R / Python
-  └── ms-simulation # Simulation
-  └── ms-statistics # Statistics
+  └── ms-language-env     # R / Python
+  └── ms-simulation       # Simulation
+  └── ms-statistics       # Statistics
 ├── packages/
-  └── ms-agent # Ai Agent
-  └── ms-chart # Chart
-  └── ms-core  # Framework Core for Electron App
-  └── ms-datasource # Data Source e.g. SQLite, MySQL, PostgreSQL, etc.
-  └── ms-i18n # Internationalization
-  └── ms-ui # Ui Component for Electron App / Web App
+  └── ms-agent            # Ai Agent
+  └── ms-chart            # Chart
+  └── ms-core             # Framework Core for Electron App
+  └── ms-datasource       # Data Source e.g. SQLite, MySQL, PostgreSQL, etc.
+  └── ms-i18n             # Internationalization
+  └── ms-ui               # Ui Component for Electron App / Web App
 ├── vender/
   └── something third party
 ├── package.json
