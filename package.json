@@ -12,8 +12,17 @@
     "dev:web": "pnpm --filter @masscholar/web run dev",
     "dev:app": "pnpm --filter @masscholar/app run dev",
     "dev:storybook": "pnpm --filter @masscholar/ui run storybook",
-    "build:ms-ui": "pnpm --filter @masscholar/ui run build",
-    "add:component": "pnpm --filter @masscholar/ui add:component"
+    "build:ui": "pnpm --filter @masscholar/ui run build",
+    "build:web": "pnpm --filter @masscholar/web run build",
+    "test:all": "",
+    "add:dep:app": "pnpm --filter @masscholar/app add",
+    "add:dep:ui": "pnpm --filter @masscholar/ui add",
+    "add:dep:chart": "pnpm --filter @masscholar/chart add",
+    "add:dep:agent": "pnpm --filter @masscholar/agent add",
+    "add:dep:core": "pnpm --filter @masscholar/core add",
+    "add:dep:datasource": "pnpm --filter @masscholar/datasource add",
+    "add:ui:component": "pnpm --filter @masscholar/ui add:component",
+    "cleandep": "rm -rf node_modules target pnpm-lock.yaml && pnpm -r exec rm -rf node_modules"
   },
   "author": "Kaifuny <kaifuny.github@gmail.com>",
   "license": "BSD-3-Clause"

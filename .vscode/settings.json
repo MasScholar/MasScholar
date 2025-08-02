@@ -16,7 +16,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     "**/dist": true,
-    "**/node_modules": false,
+    "**/node_modules": true,
     "**/.git": true,
     "**/.rust-analyzer": true,
     "**/.turbo": true,
@@ -24,5 +24,11 @@
     "**/tsconfig.tsbuildinfo": true,
     "**/.nuxt": true,
     "**/.data": true,
+    "**/target": true
   },
+  "catppuccin-icons.associations.folders": {
+    "electron": "folder_client",
+    "stores": "folder_redux",
+    "lib": "folder_utils"
+  }
 }

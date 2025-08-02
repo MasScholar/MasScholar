@@ -3,5 +3,9 @@
   "version": "0.0.1",
   "scripts": {},
   "author": "Kaifuny",
-  "license": "BSD-3-Clause"
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "skia-canvas": "^2.0.2"
+  },
+  "devDependencies": {}
 }
