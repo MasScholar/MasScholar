@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.0.0",
   "scripts": {
     "dev:app": "pnpm --filter @masscholar/app run dev",
+    "build:ms-ui": "pnpm --filter @masscholar/ui run build",
     "add:component": "pnpm --filter @masscholar/ui add:component"
   },
   "author": "Kaifuny <kaifuny.github@gmail.com>",
