@@ -53,6 +53,12 @@ pnpm dev:app
 | **9. 贝叶斯分析**     | [ ]贝叶斯回归、[ ]贝叶斯更新、[ ]贝叶斯因子检验                               |
 | **10. 模型构建/模拟** | [ ]自定义模型、[ ]最小二乘、[ ]多层线性模型、[ ]混合效应模型、[ ]蒙特卡洛模拟 |
 
+## Comparisions
+
+<a href="https://star-history.com/#MasScholar/MasScholar&liquibase/liquibase&flyway/flyway&dbeaver/cloudbeaver&Date">
+  <img src="https://api.star-history.com/svg?repos=MasScholar/MasScholar,jasp-stats/jasp-desktop,jamovi/jamovi&type=Date" alt="Star History Chart">
+</a>
+
 ## 声明
 
 - 本项目遵循 [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) 开源协议。

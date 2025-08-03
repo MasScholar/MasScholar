@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/vue3-vite';
 
 import { join, dirname } from "path"
+import { setup } from '@storybook/vue3-vite';
 
 /**
 * This function is used to resolve the absolute path of a package.
@@ -24,7 +25,10 @@ const config: StorybookConfig = {
   "framework": {
     "name": getAbsolutePath('@storybook/vue3-vite'),
     "options": {
-      docgen: 'vue-component-meta',
+      docgen: {
+        plugin: 'vue-component-meta',
+        tsconfig: 'tsconfig.app.json'
+      }
     }
   }
 };
