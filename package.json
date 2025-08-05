@@ -2,17 +2,19 @@
   "name": "@masscholar/web",
   "version": "1.0.0",
   "description": "",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "dev:web": "pnpm --filter @masscholar/web run dev",
     "dev:app": "pnpm --filter @masscholar/app run dev",
     "dev:storybook": "pnpm --filter @masscholar/ui run storybook",
+    "dev:editor": "pnpm --filter @masscholar/editor run dev",
     "build:ui": "pnpm --filter @masscholar/ui run build",
     "build:web": "pnpm --filter @masscholar/web run build",
     "test:all": "",
     "add:dep:app": "pnpm --filter @masscholar/app add",
     "add:dep:ui": "pnpm --filter @masscholar/ui add",
     "add:dep:chart": "pnpm --filter @masscholar/chart add",
+    "add:dep:editor": "pnpm --filter @masscholar/editor add",
     "add:dep:agent": "pnpm --filter @masscholar/agent add",
     "add:dep:core": "pnpm --filter @masscholar/core add",
     "add:dep:datasource": "pnpm --filter @masscholar/datasource add",
@@ -21,7 +23,16 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "better-sqlite3"
+      "@parcel/watcher",
+      "@swc/core",
+      "@tailwindcss/oxide",
+      "better-sqlite3",
+      "electron",
+      "esbuild",
+      "sharp",
+      "skia-canvas",
+      "unrs-resolver",
+      "vue-demi"
     ]
   },
   "author": "Kaifuny <kaifuny.github@gmail.com>",

@@ -39,9 +39,12 @@ MyProject.mslab/
 ├── scripts/
 │   └── script-001.py       # 自定义脚本
 │   └── script-001.ipynb    # 自定义脚本
+│   └── script-001.R        # 自定义脚本
 └── meta/
     └── version.json        # 项目版本信息
     └── config.json         # 项目配置信息
     └── i18n.json           # 国际化信息
     └── theme.json          # 主题信息
+    └── license.json        # 许可信息
+    └── author.json         # 作者信息
 ```
