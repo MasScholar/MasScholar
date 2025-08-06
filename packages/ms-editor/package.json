@@ -7,7 +7,12 @@
   },
   "author": "Kaifuny",
   "license": "AGPL-3.0-only",
-  "dependencies": {},
+  "dependencies": {
+    "@tiptap/pm": "^3.0.9",
+    "@tiptap/starter-kit": "^3.0.9",
+    "@tiptap/vue-3": "^3.0.9",
+    "monaco-editor": "^0.52.2"
+  },
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.2.2",
     "@iconify/vue": "^5.0.0",
@@ -26,7 +31,6 @@
     "eslint-plugin-vue": "~10.3.0",
     "install": "^0.13.0",
     "jiti": "^2.4.2",
-    "vue": "^3.5.18",
     "jsdom": "^26.1.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
@@ -35,6 +39,7 @@
     "vite-plugin-doubleshot": "^0.0.18",
     "vite-plugin-vue-devtools": "^8.0.0",
     "vitest": "^3.2.4",
+    "vue": "^3.5.18",
     "vue-tsc": "^3.0.4"
   }
 }
