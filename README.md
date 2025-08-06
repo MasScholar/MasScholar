@@ -26,7 +26,7 @@ pnpm dev:app
 ├── packages/
   └── ms-agent            # Ai Agent
   └── ms-chart            # Chart
-  └── ms-editor            # Editor
+  └── ms-editor           # Editor
   └── ms-core             # Framework Core for Electron App
   └── ms-datasource       # Data Source e.g. SQLite, MySQL, PostgreSQL, etc.
   └── ms-i18n             # Internationalization
