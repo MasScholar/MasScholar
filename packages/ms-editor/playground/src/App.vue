@@ -3,6 +3,3 @@
     Hello World
   </div>
 </template>
-<style scoped>
-@import "tailwindcss";
-</style>
