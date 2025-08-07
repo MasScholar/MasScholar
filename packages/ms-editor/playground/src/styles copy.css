@@ -1,7 +1,0 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
-
-body {
-  display: flex;
-  justify-content: center;
-}
