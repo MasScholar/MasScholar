@@ -30,5 +30,8 @@
     "electron": "folder_client",
     "stores": "folder_redux",
     "lib": "folder_utils"
-  }
+  },
+  "tailwindCSS.experimental.classRegex": [
+    "class:\\s*?[\"'`]([^\"'`]*).*?,"
+  ]
 }
