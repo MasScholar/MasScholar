@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { Moon, Sun } from "lucide-vue-next";
 import { Icon } from "@iconify/vue";
-import { ScrollArea } from '@masscholar/ui'
+import { ScrollArea, Switch } from '@masscholar/ui'
 import placeholder from "../assets/placeholder.svg"
 import router from "@/router";
 
@@ -54,6 +55,12 @@ function handleClickCreateProject() {
 </script>
 <template>
   <div class="flex flex-row w-full h-full">
+    <!-- toggle dart mode -->
+    <div class="absolute space-x-1 mb-4 left-4 top-2">
+      <Sun class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
+      <Switch class="mt-[4px]" />
+      <Moon class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
+    </div>
     <div
       class="electron-app-region flex flex-row justify-center items-center w-2/3 bg-[linear-gradient(135deg,#ec4899,#f472b6,#c084fc,#8b5cf6,#60a5fa,#34d399,#fbbf24)] bg-[length:200%_200%] animate-gradient-diag">
       <div class="w-[400px] relative flex flex-col text-center bg-gray-800 p-14 rounded-xl">
@@ -71,8 +78,10 @@ function handleClickCreateProject() {
         <button class="bg-white text-black px-4 py-2 rounded-lg mt-4 text-left" @click="handleClickOpenProject">
           <Icon icon="fluent:folder-24-regular" class="w-[20px] h-[20px] inline-block mr-2" />打开项目…
         </button>
+        <!-- Locale -->
+        <button class="absolute bottom-0 left-[14px] text-[24px]">🇨🇳</button>
         <!-- Settings -->
-        <button class="text-white bottom-[10px] right-[1px] absolute" @click="handleClickSetings">
+        <button class="absolute text-white bottom-[10px] right-[1px]" @click="handleClickSetings">
           <Icon icon="uil:setting" class="w-[20px] h-[20px] inline-block mr-2 hover:text-gray-500" />
         </button>
       </div>

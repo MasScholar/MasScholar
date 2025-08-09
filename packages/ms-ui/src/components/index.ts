@@ -17,12 +17,14 @@ import TabsContent from "./ui/tabs/TabsContent.vue";
 import TabsList from "./ui/tabs/TabsList.vue";
 import TabsTrigger from "./ui/tabs/TabsTrigger.vue";
 import ScrollArea from "./ui/scroll-area/ScrollArea.vue";
+import Switch from "./ui/switch/Switch.vue";
 // MasScholar/app
 
 // MasScholar/web
 
 export {
   // Shadcn/ui
+  Switch,
   Button,
   Sidebar,
   SidebarTrigger,

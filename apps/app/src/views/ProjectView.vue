@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Folder, LayoutDashboard, CalendarDays, Search, Blocks } from 'lucide-vue-next';
+import { Folder, LayoutDashboard, CalendarDays, Search, Blocks, Workflow } from 'lucide-vue-next';
 import {
   Sidebar,
   SidebarContent,
@@ -24,19 +24,24 @@ const items = [
     icon: LayoutDashboard
   },
   {
+    title: "Workflow",
+    url: "#",
+    icon: Workflow,
+  },
+  {
     title: "Calendar",
     url: "#",
     icon: CalendarDays
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search
-  },
-  {
     title: 'Plugins',
     url: '#',
     icon: Blocks,
+  },
+  {
+    title: "Search",
+    url: "#",
+    icon: Search
   }
 ];
 </script>

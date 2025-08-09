@@ -10,16 +10,16 @@ import { ScrollArea } from '@masscholar/ui';
         <TabsTrigger value="statistical" class="w-[240px]">
           统计相关
         </TabsTrigger>
-        <TabsTrigger value="simulation">
+        <TabsTrigger value="simulation" :disabled="true">
           物理仿真
         </TabsTrigger>
-        <TabsTrigger value="computer-image">
+        <TabsTrigger value="computer-image" :disabled="true">
           图像处理
         </TabsTrigger>
-        <TabsTrigger value="computer-vision">
+        <TabsTrigger value="computer-vision" :disabled="true">
           计算机视觉
         </TabsTrigger>
-        <TabsTrigger value="ai">
+        <TabsTrigger value="ai" :disabled="true">
           AI 与 数据科学
         </TabsTrigger>
       </TabsList>
