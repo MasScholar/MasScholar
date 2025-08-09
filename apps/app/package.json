@@ -19,14 +19,15 @@
     "postinstall": "pnpm install:electron"
   },
   "dependencies": {
+    "@iconify-json/radix-icons": "^1.2.2",
+    "@iconify/vue": "^5.0.0",
     "@masscholar/i18n": "workspace:^",
     "@masscholar/ui": "workspace:^",
     "@vueuse/core": "^13.6.0",
+    "lucide-vue-next": "^0.536.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.18",
-    "vue-router": "^4.5.1",
-    "@iconify-json/radix-icons": "^1.2.2",
-    "@iconify/vue": "^5.0.0"
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",

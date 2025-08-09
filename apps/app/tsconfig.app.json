@@ -8,6 +8,9 @@
   "exclude": [
     "src/**/__tests__/*"
   ],
+  "ignore": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

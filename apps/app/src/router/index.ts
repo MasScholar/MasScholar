@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('../views/LaunchView.vue'),
     },
     {
+      path: '/quick-start',
+      name: 'quick-start',
+      component: () => import('../views/QuickStartView.vue'),
+    },
+    {
       path: '/settings',
       name: 'settings',
       component: () => import('../views/SettingView.vue'),
@@ -24,9 +29,14 @@ const router = createRouter({
       component: () => import('../views/ProjectView.vue'),
     },
     {
-      path: '/learnexplore',
-      name: 'learnexplore',
-      component: () => import('../views/LearnExplore.vue'),
+      path: '/learn-explore',
+      name: 'learn-explore',
+      component: () => import('../views/LearnExploreView.vue'),
+    },
+    {
+      path: '/create-project',
+      name: 'create-project',
+      component: () => import('../views/CreateProjectView.vue'),
     }
   ],
 })
