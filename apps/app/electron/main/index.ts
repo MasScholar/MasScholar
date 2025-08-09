@@ -1,5 +1,12 @@
 import { app } from 'electron'
-import { restoreOrCreateWindow } from './mainWindow'
+import { restoreOrCreateWindow } from './windows/mainWindow'
+
+/**
+ * When
+ */
+app.on('window-all-closed', async () => {
+  if (process.platform !== 'darwin') app.quit()
+})
 
 /**
  * Create app window when background process will be ready

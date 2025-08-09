@@ -42,7 +42,7 @@ const editor = useEditor({
 })
 </script>
 <template>
-  <div class="container border-1 border-black">
+  <div>
     <editor-content :editor="editor" />
   </div>
 </template>

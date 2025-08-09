@@ -1,12 +1,8 @@
-<script setup lang="ts">
-import Layout from './layouts/Layout.vue';
-</script>
-
 <template>
-  <div>
-    <Layout></Layout>
+  <div class="w-full h-screen">
+    <router-view />
   </div>
 </template>
-<style scoped>
+<style>
 @import "tailwindcss";
 </style>

@@ -6,6 +6,7 @@
   "scripts": {
     "dev:web": "pnpm --filter @masscholar/web run dev",
     "dev:app": "pnpm --filter @masscholar/app run dev",
+    "dev:app:renderer": "pnpm --filter @masscholar/app run dev:renderer",
     "dev:storybook": "pnpm --filter @masscholar/ui run storybook",
     "dev:editor": "pnpm --filter @masscholar/editor run dev",
     "build:ui": "pnpm --filter @masscholar/ui run build",
