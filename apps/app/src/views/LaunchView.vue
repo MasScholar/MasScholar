@@ -6,10 +6,10 @@ import placeholder from "../assets/placeholder.svg"
 <template>
   <div class="flex flex-row w-full h-full">
     <div
-      class="flex flex-row justify-center items-center w-2/3 bg-[linear-gradient(135deg,#ec4899,#f472b6,#c084fc,#8b5cf6,#60a5fa,#34d399,#fbbf24)] bg-[length:200%_200%] animate-gradient-diag">
-      <div class="relative flex flex-col text-center bg-gray-800 p-20 rounded-xl">
-        <h1 class="text-white text-5xl font-bold">MasScholar</h1>
-        <p class="text-gray-300 text-lg mb-4">Modern AI-Powered Statistical Toolkit</p>
+      class="electron-app-region flex flex-row justify-center items-center w-2/3 bg-[linear-gradient(135deg,#ec4899,#f472b6,#c084fc,#8b5cf6,#60a5fa,#34d399,#fbbf24)] bg-[length:200%_200%] animate-gradient-diag">
+      <div class="w-[400px] relative flex flex-col text-center bg-gray-800 p-14 rounded-xl">
+        <h1 class="text-white text-5xl font-bold">MaS<br />Scholar</h1>
+        <p class="text-gray-300 text-sm mt-2 mb-2">Modern AI-Powered Statistical Toolkit</p>
         <button class="bg-white text-black px-4 py-2 rounded-lg mt-4 text-left">
           <Icon icon="mdi:arrow-right" class="w-[20px] h-[20px] inline-block mr-2" />快速开始…
         </button>
