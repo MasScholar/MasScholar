@@ -7,6 +7,10 @@ import SidebarHeader from "./ui/sidebar/SidebarHeader.vue";
 import SidebarContent from "./ui/sidebar/SidebarContent.vue";
 import SidebarGroup from "./ui/sidebar/SidebarGroup.vue";
 import SidebarFooter from "./ui/sidebar/SidebarFooter.vue";
+import Tabs from "./ui/tabs/Tabs.vue";
+import TabsContent from "./ui/tabs/TabsContent.vue";
+import TabsList from "./ui/tabs/TabsList.vue";
+import TabsTrigger from "./ui/tabs/TabsTrigger.vue";
 // MasScholar/app
 
 // MasScholar/web
@@ -20,7 +24,11 @@ export {
   SidebarHeader,
   SidebarContent,
   SidebarGroup,
-  SidebarFooter
+  SidebarFooter,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 
   // MasScholar/app
 

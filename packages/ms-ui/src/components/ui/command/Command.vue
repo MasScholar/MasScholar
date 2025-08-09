@@ -64,9 +64,9 @@ function filterItems() {
   filterState.filtered.count = itemCount
 }
 
-function handleSelect() {
-  filterState.search = ''
-}
+// function handleSelect() {
+//   filterState.search = ''
+// }
 
 watch(() => filterState.search, () => {
   filterItems()
@@ -80,11 +80,8 @@ provideCommandContext({
 </script>
 
 <template>
-  <ListboxRoot
-    data-slot="command"
-    v-bind="forwarded"
-    :class="cn('bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md', props.class)"
-  >
+  <ListboxRoot data-slot="command" v-bind="forwarded"
+    :class="cn('bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md', props.class)">
     <slot />
   </ListboxRoot>
 </template>

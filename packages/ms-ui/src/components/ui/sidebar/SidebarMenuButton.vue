@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<SidebarMenuButtonProps & {
 
 const { isMobile, state } = useSidebar()
 
-const delegatedProps = reactiveOmit(props, 'tooltip')
+const delegatedProps = reactiveOmit(props, 'tooltip') as any
 </script>
 
 <template>
@@ -33,11 +33,7 @@ const delegatedProps = reactiveOmit(props, 'tooltip')
         <slot />
       </SidebarMenuButtonChild>
     </TooltipTrigger>
-    <TooltipContent
-      side="right"
-      align="center"
-      :hidden="state !== 'collapsed' || isMobile"
-    >
+    <TooltipContent side="right" align="center" :hidden="state !== 'collapsed' || isMobile">
       <template v-if="typeof tooltip === 'string'">
         {{ tooltip }}
       </template>

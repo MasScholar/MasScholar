@@ -15,7 +15,6 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
-    "**/dist": true,
     "**/node_modules": true,
     "**/.git": true,
     "**/.rust-analyzer": true,
