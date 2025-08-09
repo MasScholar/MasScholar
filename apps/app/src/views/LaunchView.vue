@@ -92,7 +92,6 @@ import placeholder from "../assets/placeholder.svg"
   }
 }
 
-/* 你可以把这个类放到全局 css（或用 Tailwind config 注册动画） */
 .animate-gradient-diag {
   animation: gradient-diag 10s ease infinite;
 }
