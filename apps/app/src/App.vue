@@ -11,6 +11,8 @@ import { SidebarProvider } from '@masscholar/ui';
 <style>
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 html,
 body {
   @apply overscroll-none overflow-hidden;

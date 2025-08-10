@@ -4,6 +4,9 @@ import { Icon } from "@iconify/vue";
 import { ScrollArea, Switch } from '@masscholar/ui'
 import placeholder from "../assets/placeholder.svg"
 import router from "@/router";
+import { useColorMode } from '@vueuse/core'
+
+const theme_mode = useColorMode()
 
 const recently_used_list = [
   {
@@ -58,43 +61,51 @@ function handleClickCreateProject() {
     <!-- toggle dart mode -->
     <div class="absolute space-x-1 mb-4 left-4 top-2">
       <Sun class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
-      <Switch class="mt-[4px]" />
+      <Switch class="mt-[4px] cursor-pointer" :model-value="theme_mode === 'dark'"
+        @update:model-value="(value) => { theme_mode = value ? 'dark' : 'light' }" />
       <Moon class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
     </div>
     <div
       class="electron-app-region flex flex-row justify-center items-center w-2/3 bg-[linear-gradient(135deg,#ec4899,#f472b6,#c084fc,#8b5cf6,#60a5fa,#34d399,#fbbf24)] bg-[length:200%_200%] animate-gradient-diag">
-      <div class="w-[400px] relative flex flex-col text-center bg-gray-800 p-14 rounded-xl">
-        <h1 class="text-white text-5xl font-bold">MaS<br />Scholar</h1>
-        <p class="text-gray-300 text-sm mt-2 mb-2">Modern AI-Powered Statistical Toolkit</p>
-        <button class="bg-white text-black px-4 py-2 rounded-lg mt-4 text-left" @click="handleClickQuickStart">
+      <div class="w-[400px] relative flex flex-col text-center bg-white dark:bg-gray-800 p-14 rounded-xl">
+        <h1 class="text-black dark:text-white text-5xl font-bold">MaS<br />Scholar</h1>
+        <p class="text-gray-600 dark:text-gray-300 text-sm mt-2 mb-2">Modern AI-Powered Statistical Toolkit</p>
+        <button class="bg-gray-500 text-white dart:bg-white text-black px-4 py-2 rounded-lg mt-4 text-left"
+          @click="handleClickQuickStart">
           <Icon icon="mdi:arrow-right" class="w-[20px] h-[20px] inline-block mr-2" />快速开始…
         </button>
-        <button class="bg-white text-black px-4 py-2 rounded-lg mt-4 text-left" @click="handleClickLearnAndExplore">
+        <button class="bg-white border-solid border-1 text-black px-4 py-2 rounded-lg mt-4 text-left"
+          @click="handleClickLearnAndExplore">
           <Icon icon="ion:library-outline" class="w-[20px] h-[20px] inline-block mr-2" />学习与探索…
         </button>
-        <button class="bg-white text-black px-4 py-2 rounded-lg mt-4 text-left" @click="handleClickCreateProject">
+        <button class="bg-white border-solid border-1 text-black px-4 py-2 rounded-lg mt-4 text-left"
+          @click="handleClickCreateProject">
           <Icon icon="f7:plus-app" class="w-[20px] h-[20px] inline-block mr-2" />新建项目…
         </button>
-        <button class="bg-white text-black px-4 py-2 rounded-lg mt-4 text-left" @click="handleClickOpenProject">
+        <button class="bg-white border-solid border-1 text-black px-4 py-2 rounded-lg mt-4 text-left"
+          @click="handleClickOpenProject">
           <Icon icon="fluent:folder-24-regular" class="w-[20px] h-[20px] inline-block mr-2" />打开项目…
         </button>
         <!-- Locale -->
         <button class="absolute bottom-0 left-[14px] text-[24px]">🇨🇳</button>
         <!-- Settings -->
-        <button class="absolute text-white bottom-[10px] right-[1px]" @click="handleClickSetings">
+        <button class="absolute text-gray-700 dark:text-white bottom-[10px] right-[1px]" @click="handleClickSetings">
           <Icon icon="uil:setting" class="w-[20px] h-[20px] inline-block mr-2 hover:text-gray-500" />
         </button>
       </div>
     </div>
-    <ScrollArea class="flex flex-col flex-grow h-screen p-2 bg-gray-700">
+    <ScrollArea class="flex flex-col flex-grow h-screen p-2 bg-white dark:bg-gray-700">
       <div v-for="recently_used in recently_used_list" :key="recently_used.uid"
         class="flex flex-row justify-start items-center w-full h-[60px] rounded-lg text-white p-2 mb-2">
         <div class="w-[50px] h-full mr-2">
           <img :src="placeholder" alt="Image" class="object-cover w-full h-full rounded-lg" />
         </div>
-        <div>
-          <h6 class="text-sm">{{ recently_used.name }}</h6>
-          <span class="text-xs text-gray-400">{{ recently_used.type }}</span>
+        <div class="flex-grow">
+          <h6 class="text-sm text-black dark:text-white">{{ recently_used.name }}</h6>
+          <div class="flex flex-row items-center justify-between mt-2">
+            <span class="text-xs text-gray-400">{{ recently_used.type }}</span>
+            <span class="text-xs text-gray-400">1 min before</span>
+          </div>
         </div>
       </div>
     </ScrollArea>
