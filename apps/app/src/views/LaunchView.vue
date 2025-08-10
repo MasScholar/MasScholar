@@ -58,15 +58,16 @@ function handleClickCreateProject() {
 </script>
 <template>
   <div class="flex flex-row w-full h-full">
-    <!-- toggle dart mode -->
-    <div class="absolute space-x-1 mb-4 left-4 top-2">
-      <Sun class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
-      <Switch class="mt-[4px] cursor-pointer" :model-value="theme_mode === 'dark'"
-        @update:model-value="(value) => { theme_mode = value ? 'dark' : 'light' }" />
-      <Moon class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
-    </div>
     <div
-      class="electron-app-region flex flex-row justify-center items-center w-2/3 bg-[linear-gradient(135deg,#ec4899,#f472b6,#c084fc,#8b5cf6,#60a5fa,#34d399,#fbbf24)] bg-[length:200%_200%] animate-gradient-diag">
+      class="relative flex flex-row justify-center items-center w-2/3 bg-[linear-gradient(135deg,#ec4899,#f472b6,#c084fc,#8b5cf6,#60a5fa,#34d399,#fbbf24)] bg-[length:200%_200%] animate-gradient-diag">
+      <div class="electron-app-region absolute w-full h-[35px] top-0"></div>
+      <!-- toggle dart mode -->
+      <div class="electron-app-region-none absolute space-x-1 mb-4 right-4 top-[10px]">
+        <Sun class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
+        <Switch class="mt-[4px] cursor-pointer" :model-value="theme_mode === 'dark'"
+          @update:model-value="(value) => { theme_mode = value ? 'dark' : 'light' }" />
+        <Moon class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
+      </div>
       <div class="w-[400px] relative flex flex-col text-center bg-white dark:bg-gray-800 p-14 rounded-xl">
         <h1 class="text-black dark:text-white text-5xl font-bold">MaS<br />Scholar</h1>
         <p class="text-gray-600 dark:text-gray-300 text-sm mt-2 mb-2">Modern AI-Powered Statistical Toolkit</p>

@@ -125,3 +125,7 @@
 .electron-app-region {
   app-region: drag;
 }
+
+.electron-app-region-none {
+  app-region: none;
+}
