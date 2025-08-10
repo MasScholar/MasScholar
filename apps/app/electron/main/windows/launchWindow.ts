@@ -1,15 +1,18 @@
 import { BrowserWindow } from 'electron'
+import { join } from 'path'
 
-export async function createMainWindow() {
+export async function createLaunchWindow() {
   const browserWindow = new BrowserWindow({
     show: false,
     titleBarStyle: 'hidden',
     resizable: false,
-    width: 1200,
+    width: 1000,
     height: 600,
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     webPreferences: {
-      webviewTag: false,
+      contextIsolation: true, // 默认 true
+      nodeIntegration: false,
+      preload: join(__dirname, '../preload/index.cjs'),
     },
   })
 
@@ -20,7 +23,7 @@ export async function createMainWindow() {
     browserWindow?.show()
   })
 
-  await browserWindow.loadURL('http://localhost:5173/#/projects')
+  await browserWindow.loadURL('http://localhost:5173/#/launch')
   return browserWindow
 }
 

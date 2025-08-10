@@ -37,7 +37,10 @@ const recently_used_list = [
 ];
 
 function handleClickSetings() {
-  router.push("/settings");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  console.log('handleClickSetings', (window as any).electronAPI);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (window as any).electronAPI.send('open-settings-window')
 }
 
 function handleClickOpenProject() {
@@ -68,7 +71,8 @@ function handleClickCreateProject() {
           @update:model-value="(value) => { theme_mode = value ? 'dark' : 'light' }" />
         <Moon class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
       </div>
-      <div class="w-[400px] relative flex flex-col text-center bg-white dark:bg-gray-800 p-14 rounded-xl">
+      <div
+        class="electron-app-region-none w-[400px] relative flex flex-col text-center bg-white dark:bg-gray-800 p-14 rounded-xl">
         <h1 class="text-black dark:text-white text-5xl font-bold">MaS<br />Scholar</h1>
         <p class="text-gray-600 dark:text-gray-300 text-sm mt-2 mb-2">Modern AI-Powered Statistical Toolkit</p>
         <button class="bg-gray-500 text-white dart:bg-white text-black px-4 py-2 rounded-lg mt-4 text-left"
@@ -88,9 +92,11 @@ function handleClickCreateProject() {
           <Icon icon="fluent:folder-24-regular" class="w-[20px] h-[20px] inline-block mr-2" />打开项目…
         </button>
         <!-- Locale -->
-        <button class="absolute bottom-0 left-[14px] text-[24px]">🇨🇳</button>
+        <button class="electron-app-region-none absolute bottom-0 left-[14px] text-[24px]">🇨🇳</button>
         <!-- Settings -->
-        <button class="absolute text-gray-700 dark:text-white bottom-[10px] right-[1px]" @click="handleClickSetings">
+        <button
+          class="electron-app-region-none absolute text-gray-700 dark:text-white bottom-[10px] right-[1px] cursor-pointer"
+          @click="handleClickSetings">
           <Icon icon="uil:setting" class="w-[20px] h-[20px] inline-block mr-2 hover:text-gray-500" />
         </button>
       </div>

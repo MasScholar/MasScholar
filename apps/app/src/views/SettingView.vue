@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from '@masscholar/ui'
 <template>
   <div class="p-2">
     <div class="flex flex-row justify-center">
-      <Tabs default-value="account">
+      <Tabs default-value="account" class="electron-app-region">
         <TabsList>
           <TabsTrigger value="account" class="w-[240px]">
             账户

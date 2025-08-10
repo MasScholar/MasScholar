@@ -1,12 +1,13 @@
 import { BrowserWindow } from 'electron'
 
-export async function createMainWindow() {
+export async function createSettingWindow() {
   const browserWindow = new BrowserWindow({
     show: false,
-    titleBarStyle: 'hidden',
     resizable: false,
-    width: 1200,
-    height: 600,
+    minimizable: false,
+    alwaysOnTop: true,
+    width: 900,
+    height: 500,
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     webPreferences: {
       webviewTag: false,
@@ -20,7 +21,7 @@ export async function createMainWindow() {
     browserWindow?.show()
   })
 
-  await browserWindow.loadURL('http://localhost:5173/#/projects')
+  await browserWindow.loadURL('http://localhost:5173/#/settings')
   return browserWindow
 }
 
