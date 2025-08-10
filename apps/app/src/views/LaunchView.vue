@@ -116,7 +116,7 @@ function handleClickCreateProject() {
           <img :src="placeholder" alt="Image" class="object-cover w-full h-full rounded-lg" />
         </div>
         <div class="flex-grow">
-          <h6 class="text-sm text-black dark:text-white">{{ recently_used.name }}</h6>
+          <h6 class="text-sm text-black dark:text-white group-hover:text-white">{{ recently_used.name }}</h6>
           <div class="flex flex-row items-center justify-between mt-2">
             <span class="text-xs text-gray-400 group-hover:text-white">{{ recently_used.type }}</span>
             <span class="text-xs text-gray-400 group-hover:text-white">1 min before</span>
