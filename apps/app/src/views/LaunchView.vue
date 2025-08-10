@@ -71,6 +71,10 @@ function handleClickCreateProject() {
           @update:model-value="(value) => { theme_mode = value ? 'dark' : 'light' }" />
         <Moon class="text-white w-[14px] h-[14px] inline-block mt-[-8px]" />
       </div>
+      <!-- version -->
+      <div class="absolute text-white dark:text-gray-400 text-sm bottom-2 left-2">
+        v0.0.1
+      </div>
       <div
         class="electron-app-region-none w-[400px] relative flex flex-col text-center bg-white dark:bg-gray-800 p-14 rounded-xl">
         <h1 class="text-black dark:text-white text-5xl font-bold">MaS<br />Scholar</h1>
