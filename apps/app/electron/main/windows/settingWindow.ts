@@ -8,6 +8,7 @@ export async function createSettingWindow() {
     alwaysOnTop: true,
     width: 900,
     height: 500,
+    title: 'Settings',
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     webPreferences: {
       webviewTag: false,

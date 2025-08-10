@@ -1,12 +1,25 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import { createLaunchWindow } from './windows/launchWindow'
 import { createSettingWindow } from './windows/settingWindow'
-
+import { createMainWindow } from './windows/mainWindow'
+import { createCreateProjectWindow } from './windows/createProjectWindow'
 /**
- * When app is ready
+ * open window
  */
 ipcMain.on('open-settings-window', async () => {
   await createSettingWindow()
+})
+
+ipcMain.on('open-create-window', async () => {
+  await createCreateProjectWindow()
+})
+
+ipcMain.on('open-main-window', async () => {
+  await createMainWindow()
+})
+
+ipcMain.on('open-launch-window', async () => {
+  await createLaunchWindow()
 })
 
 /**
