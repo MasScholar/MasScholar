@@ -1,8 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { createLaunchWindow } from './windows/launchWindow'
-import { createSettingWindow } from './windows/settingWindow'
-import { createMainWindow } from './windows/mainWindow'
-import { createCreateProjectWindow } from './windows/createProjectWindow'
+import { createLaunchWindow } from './windows/launch-window'
+import { createSettingWindow } from './windows/setting-window'
+import { createMainWindow } from './windows/main-window'
+import { createCreateProjectWindow } from './windows/create-project-window'
 /**
  * open window
  */
