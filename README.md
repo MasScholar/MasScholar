@@ -7,6 +7,8 @@
 MasScholar 是一款专为 教学实验室、科研团队与跨学科项目 打造的统计分析与协作平台。
 集成桌面级应用体验与云端协作能力，旨在成为 SPSS® 和 SAS® 在教学与探索性数据分析场景下的现代交互的可替代品。
 
+<img src="./launch.png" />
+
 ## Quick Start For Developers
 
 ```bash
