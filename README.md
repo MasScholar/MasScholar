@@ -60,7 +60,7 @@ pnpm dev:app
 ## Comparisions
 
 <a href="https://star-history.com/#MasScholar/MasScholar&liquibase/liquibase&flyway/flyway&dbeaver/cloudbeaver&Date">
-  <img src="https://api.star-history.com/svg?repos=MasScholar/MasScholar,jasp-stats/jasp-desktop,jamovi/jamovi&type=Date" alt="Star History Chart">
+  <img src="https://api.star-history.com/svg?repos=MasScholar/MasScholar,jasp-stats/jasp-desktop,jamovi/jamovi,biolab/orange3&type=Date" alt="Star History Chart">
 </a>
 
 ## 声明
