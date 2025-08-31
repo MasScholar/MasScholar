@@ -52,12 +52,12 @@ const items = [
 </script>
 <template>
   <div class="flex flex-row h-screen">
-    <Sidebar class="w-[42px]">
+    <Sidebar class="w-[42px]" collapsible="icon">
       <SidebarContent>
         <SidebarGroup class="p-1">
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem v-for="item in items" :key="item.title">
+              <SidebarMenuItem v-for="item in items" :key="item.title" class="flex justify-center items-center">
                 <SidebarMenuButton asChild>
                   <a :href="item.url">
                     <component :is="item.icon" />
@@ -68,7 +68,6 @@ const items = [
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarFooter>
-
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>
