@@ -36,11 +36,14 @@ const recently_used_list = [
   },
 ];
 
-function handleClickSetings() {
+async function handleClickSetings() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  console.log('handleClickSetings', (window as any).electronAPI);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any).electronAPI.send('open-settings-window')
+  console.log('handleClickSetings', (window as any).NativeAPI);
+  const user = await window.NativeAPI.user.getUser("123");
+  console.log("User:", user);
+
+  window.NativeAPI.chat.sendMessage({ user: "Tom", text: "Hello!" });
+  // (window as any).electronAPI.send('open-settings-window')
 }
 
 function handleClickOpenProject() {

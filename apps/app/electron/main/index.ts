@@ -1,26 +1,10 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
+
+import { useMiddleware } from "./framework";
+
 import { createLaunchWindow } from './windows/launch-window'
-import { createSettingWindow } from './windows/setting-window'
-import { createMainWindow } from './windows/main-window'
-import { createCreateProjectWindow } from './windows/create-project-window'
-/**
- * open window
- */
-ipcMain.on('open-settings-window', async () => {
-  await createSettingWindow()
-})
 
-ipcMain.on('open-create-window', async () => {
-  await createCreateProjectWindow()
-})
-
-ipcMain.on('open-main-window', async () => {
-  await createMainWindow()
-})
-
-ipcMain.on('open-launch-window', async () => {
-  await createLaunchWindow()
-})
+import './handlers'
 
 /**
  * When
@@ -28,6 +12,13 @@ ipcMain.on('open-launch-window', async () => {
 app.on('window-all-closed', async () => {
   if (process.platform !== 'darwin') app.quit()
 })
+
+// 全局中间件示例
+useMiddleware(async (ctx, next) => {
+  console.log("[Middleware] Channel:", ctx.channel, "Args:", ctx.args);
+  await next();
+  if (ctx.result) console.log("[Middleware] Result:", ctx.result);
+});
 
 /**
  * Create app window when background process will be ready

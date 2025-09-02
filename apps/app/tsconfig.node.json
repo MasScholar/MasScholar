@@ -6,7 +6,8 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
-    "eslint.config.*"
+    "eslint.config.*",
+    "electron/**/*"
   ],
   "ignore": [
     "node_modules"
@@ -19,6 +20,7 @@
     "types": [
       "node"
     ],
+    "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }

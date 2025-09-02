@@ -1,10 +1,14 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  send: (channel, data) => {
-    ipcRenderer.send(channel, data)
+const api = {
+  user: {
+    getUser: (id: string) => ipcRenderer.invoke("UserService.getUser", id),
+    updateUser: (payload: { id: string; name: string }) => ipcRenderer.invoke("UserService.updateUser", payload),
   },
-  on: (channel, func) => {
-    ipcRenderer.on(channel, (event, ...args) => func(...args))
-  }
-})
+  chat: {
+    sendMessage: (msg: { user: string; text: string }) => ipcRenderer.send("ChatService.sendMessage", msg),
+  },
+};
+
+contextBridge.exposeInMainWorld("NativeAPI", api);
+export type ApiType = typeof api;
