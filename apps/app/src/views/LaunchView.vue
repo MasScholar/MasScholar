@@ -39,10 +39,10 @@ const recently_used_list = [
 async function handleClickSetings() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   console.log('handleClickSetings', (window as any).NativeAPI);
-  const user = await window.NativeAPI.user.getUser("123");
+  const user = await window.NATIVE_API.user.getUser("123");
   console.log("User:", user);
 
-  window.NativeAPI.chat.sendMessage({ user: "Tom", text: "Hello!" });
+  window.NATIVE_API.chat.sendMessage({ user: "Tom", text: "Hello!" });
   // (window as any).electronAPI.send('open-settings-window')
 }
 

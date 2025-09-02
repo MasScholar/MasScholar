@@ -10,5 +10,5 @@ const api = {
   },
 };
 
-contextBridge.exposeInMainWorld("NativeAPI", api);
+contextBridge.exposeInMainWorld("NATIVE_API", api);
 export type ApiType = typeof api;
