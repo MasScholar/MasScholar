@@ -10,7 +10,7 @@ export async function createLaunchWindow() {
     height: 600,
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     webPreferences: {
-      contextIsolation: true, // 默认 true
+      contextIsolation: true,
       nodeIntegration: false,
       preload: join(__dirname, '../preload/index.cjs'),
     },

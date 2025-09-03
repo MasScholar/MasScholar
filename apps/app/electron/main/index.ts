@@ -4,7 +4,7 @@ import { useMiddleware } from "./framework";
 
 import { createLaunchWindow } from './windows/launch-window'
 
-import './handlers'
+import './services'
 
 /**
  * When

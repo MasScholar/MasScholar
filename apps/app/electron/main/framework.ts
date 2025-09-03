@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // main/framework.ts
 import { ipcMain, IpcMainInvokeEvent } from "electron";
-import { ZodTypeAny } from "zod";
+import { ZodType } from "zod";
 
 /** ===== IoC 容器 ===== */
 const providers = new Map<string, any>();
@@ -34,14 +34,14 @@ export interface IpcContext {
 }
 
 /** ===== 元信息 ===== */
-type EventMeta = { methodName: string; schema?: ZodTypeAny };
-type ActionMeta = { methodName: string; schema?: ZodTypeAny };
+type EventMeta = { methodName: string; schema?: ZodType };
+type ActionMeta = { methodName: string; schema?: ZodType };
 
 const classActionMetadata = new Map<any, Record<string, ActionMeta>>();
 const classEventMetadata = new Map<any, Record<string, EventMeta>>();
 
 /** ===== Action 装饰器 ===== */
-export function Action(channel: string, schema?: ZodTypeAny) {
+export function Action(channel: string, schema?: ZodType) {
   return function (target: any, key: any) {
     let meta = classActionMetadata.get(target.constructor);
     if (!meta) meta = {};
@@ -51,7 +51,7 @@ export function Action(channel: string, schema?: ZodTypeAny) {
 }
 
 /** ===== Event 装饰器 ===== */
-export function Event(channel: string, schema?: ZodTypeAny) {
+export function Event(channel: string, schema?: ZodType) {
   return function (target: any, key: any) {
     let meta = classEventMetadata.get(target.constructor);
     if (!meta) meta = {};
