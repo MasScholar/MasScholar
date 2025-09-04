@@ -1,9 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // main/framework.ts
 import { ipcMain, IpcMainInvokeEvent } from "electron";
+import "reflect-metadata"
 import { ZodType } from "zod";
 
-/** ===== IoC 容器 ===== */
+//============================ START OF SECTION ============================//
+/**
+ * design a lightweight IoC framework for Electron IPC
+ *
+ * How to use:
+ * 1. Define a service with @Service decorator
+ * 2. Define methods with @Action or @Event decorators
+ * 3. Use @Inject to inject services into other services
+ * 4. Use useMiddleware to add middleware for IPC handling
+ *
+ * Example:
+ * @Service()
+ * class MyService { // must end with 'Service'
+ *   @Action('class_name.method_name', z.object({ foo: z.string() }))
+ *   async doSomething(data: { foo: string }) {
+ *    // handle action
+ *   }
+ * }
+ *
+ * in another service
+ * @Service()
+ * class AnotherService {
+ *  constructor(@Inject('MyService') private myService: MyService) {}
+ * }
+ */
+/** ===== IoC ===== */
 const providers = new Map<string, any>();
 
 /** ===== Middleware ===== */
@@ -50,7 +76,7 @@ export function Action(channel: string, schema?: ZodType) {
   };
 }
 
-/** ===== Event 装饰器 ===== */
+/** ===== Event Decorator ===== */
 export function Event(channel: string, schema?: ZodType) {
   return function (target: any, key: any) {
     let meta = classEventMetadata.get(target.constructor);
@@ -60,7 +86,7 @@ export function Event(channel: string, schema?: ZodType) {
   };
 }
 
-/** ===== Service 装饰器 ===== */
+/** ===== Service Decorator ===== */
 function getInstanceMethodNames(obj: any) {
   const proto = Object.getPrototypeOf(obj); // 获取原型
   return Object.getOwnPropertyNames(proto).filter(
@@ -72,7 +98,7 @@ export function Service(id?: string) {
   return function (TargetClass: any) {
     const key = id || TargetClass.name;
     const instance = new TargetClass();
-    /** 注册 Action */
+    /** Register Action */
     for (const methodName of getInstanceMethodNames(instance)) {
       const actions = classActionMetadata.get(`${TargetClass.name}.${methodName}`) || {};
       for (const [channel, meta] of Object.entries(actions)) {
@@ -89,7 +115,7 @@ export function Service(id?: string) {
       }
     }
 
-    /** 注册 Event */
+    /** Register Event */
     for (const methodName of getInstanceMethodNames(instance)) {
       const events = classEventMetadata.get(`${TargetClass.name}.${methodName}`) || {};
       for (const [channel, meta] of Object.entries(events)) {
@@ -109,7 +135,7 @@ export function Service(id?: string) {
   };
 }
 
-/** ===== Inject 装饰器 ===== */
+/** ===== Inject Decorator ===== */
 export function Inject(id: string) {
   return function (target: any, _key: string, index: number) {
     const original = target;
@@ -131,3 +157,145 @@ export function subscribe<T = any>(channel: string, cb: EventCallback<T>) {
   subscriptions[channel].add(cb);
   return () => subscriptions[channel].delete(cb);
 }
+
+//============================ END OF SECTION ==============================//
+
+//============================ START OF SECTION ============================//
+/**
+ * design a lightweight web framework for Electron protocol
+ *
+ * How to use:
+ * 1. Define a controller with decorators
+ * 2. Use @Controller to define the base path
+ * 3. Use @Get, @Post, etc. to define routes
+ * 4. Use @PathParam, @Param, @Query, @Body, @Header to extract request data
+ *
+ * Example:
+ * @Controller('/api')
+ * class MyController {
+ *   @Get('/hello')
+ *   async sayHello(ctx: Context) {
+ *   ctx.res.json({ message: 'Hello, World!' });
+ * }
+ */
+// Protocol Framework
+
+export interface AppRequest {
+  raw: Request;
+  method: string;
+  url: URL;
+  headers: Record<string, string>;
+  params: Record<string, string>;
+  query: Record<string, string | string[]>;
+  json<T = any>(): Promise<T>;
+  text(): Promise<string>;
+  formData(): Promise<FormData>;
+  arrayBuffer(): Promise<ArrayBuffer>;
+}
+
+export class AppResponse {
+  private _status: number = 200;
+  private _headers = new Headers();
+  private _body: BodyInit | null = null;
+
+  status(code: number) { this._status = code; return this; }
+  header(name: string, val: string) { this._headers.set(name, val); return this; }
+  json(data: any) { this._headers.set('Content-Type', 'application/json'); this._body = JSON.stringify(data); return this; }
+  text(data: string) { this._headers.set('Content-Type', 'text/plain'); this._body = data; return this; }
+  html(data: string) { this._headers.set('Content-Type', 'text/html'); this._body = data; return this; }
+  bytes(buf: Uint8Array | ArrayBuffer) { this._body = buf as BodyInit; return this; }
+  stream(body: ReadableStream) { this._body = body; return this; }
+  finalize(): Response { return new Response(this._body, { status: this._status, headers: this._headers }); }
+}
+
+export interface Context {
+  req: AppRequest;
+  res: AppResponse;
+  next: () => Promise<void>;
+}
+
+const META = {
+  ctrlPrefix: Symbol('ctrl:prefix'),
+  routes: Symbol('routes'),
+  params: Symbol('params'),
+  schema: Symbol('schema'),
+}
+
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS';
+
+export function Controller(prefix: string = '') {
+  return function (target: any) {
+    if (prefix && !prefix.startsWith('/')) {
+      prefix = '/' + prefix;
+    }
+    if (prefix.endsWith('/')) {
+      prefix = prefix.slice(0, -1);
+    }
+    if (Reflect.hasMetadata(META.ctrlPrefix, target)) {
+      throw new Error(`Duplicate @Controller definition on ${target.name}`);
+    }
+    Reflect.defineMetadata(META.ctrlPrefix, prefix, target);
+  }
+}
+
+// Http Method Decorators
+function methodDecoratorFactory(httpMethod: HttpMethod) {
+  return function (path: string, schema?: ZodType) {
+    return function (target: any, key: string) {
+      console.log(`Registering route: [${httpMethod}] ${path} -> ${target.constructor.name}.${key}`);
+      console.log('Schema:', schema); // Debug log
+    }
+  }
+}
+
+export const Get = methodDecoratorFactory('GET');
+export const Post = methodDecoratorFactory('POST');
+export const Put = methodDecoratorFactory('PUT');
+export const Delete = methodDecoratorFactory('DELETE');
+export const Options = methodDecoratorFactory('OPTIONS');
+
+// Parameter Decorators
+function paramDecoratorFactory(type: 'path_param' | 'param' | 'query' | 'body' | 'ctx', key?: string) {
+  return function (target: any, propertyKey: string, index: number) {
+    console.log(`Registering param: ${type} ${index} -> ${target.constructor.name}.${propertyKey} ${key}`);
+  }
+}
+
+export const PathParam = (k: string) => paramDecoratorFactory('path_param', k);
+export const Param = (k: string) => paramDecoratorFactory('param', k);
+export const Query = (k: string) => paramDecoratorFactory('query', k);
+export const Body = () => paramDecoratorFactory('body');
+export const Ctx = () => paramDecoratorFactory('ctx');
+
+// Validation Decorator
+export function Validate(schema: ZodType) {
+  return function (target: any, propertyKey: string) {
+    console.log(`Registering validation schema for ${schema} on ${target.constructor.name}.${propertyKey}`);
+  }
+}
+
+// bootstrap function to register protocol
+export function bootstrapProtocol(scheme: string) {
+  console.log(`Bootstrapping protocol: ${scheme}`);
+}
+//============================ END OF SECTION ==============================//
+
+//============================ START OF SECTION ============================//
+/**
+ * Helper Scripts
+ *
+ * How to use:
+ * 1. Call generateSDK() to generate SDK files
+ */
+export function generateDocs() {
+  console.log('Generating docs...');
+}
+
+export function generateRenderProtocolSDK() {
+  console.log('Generating SDK...');
+}
+
+export function generateRenderServiceSDK() {
+  console.log('Generating service types...');
+}
+//============================ END OF SECTION ==============================//
