@@ -23,7 +23,10 @@
     "**/tsconfig.tsbuildinfo": true,
     "**/.nuxt": true,
     "**/.data": true,
-    "**/target": true
+    "**/target": true,
+    "**/.temp": true,
+    "**/.cache": true,
+    "**/dist": true,
   },
   "catppuccin-icons.associations.folders": {
     "electron": "folder_client",

@@ -11,10 +11,10 @@ export const zhNavbar = defineNavbarConfig([
   { text: '博客', link: '/blog/' },
   { text: '标签', link: '/blog/tags/' },
   { text: '归档', link: '/blog/archives/' },
-  {
-    text: '笔记',
-    items: [{ text: '示例', link: '/notes/demo/README.md' }]
-  },
+  // {
+  //   text: '笔记',
+  //   items: [{ text: '示例', link: '/notes/demo/README.md' }]
+  // },
 ])
 
 export const enNavbar = defineNavbarConfig([
@@ -22,9 +22,9 @@ export const enNavbar = defineNavbarConfig([
   { text: 'Blog', link: '/en/blog/' },
   { text: 'Tags', link: '/en/blog/tags/' },
   { text: 'Archives', link: '/en/blog/archives/' },
-  {
-    text: 'Notes',
-    items: [{ text: 'Demo', link: '/en/notes/demo/README.md' }]
-  },
+  // {
+  //   text: 'Notes',
+  //   items: [{ text: 'Demo', link: '/en/notes/demo/README.md' }]
+  // },
 ])
 
