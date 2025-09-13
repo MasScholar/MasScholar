@@ -4,6 +4,7 @@
   "description": "",
   "packageManager": "pnpm@10.14.0",
   "scripts": {
+    "dev:blog": "pnpm --filter @masscholar/blog run docs:dev",
     "dev:web": "pnpm --filter @masscholar/web run dev",
     "dev:app": "pnpm --filter @masscholar/app run dev",
     "dev:app:renderer": "pnpm --filter @masscholar/app run dev:renderer",
@@ -11,6 +12,7 @@
     "dev:editor": "pnpm --filter @masscholar/editor run dev",
     "build:ui": "pnpm --filter @masscholar/ui run build",
     "build:web": "pnpm --filter @masscholar/web run build",
+    "build:blog": "pnpm --filter @masscholar/blog run docs:build",
     "test:core": "",
     "test:agent": "",
     "test:datasource": "",

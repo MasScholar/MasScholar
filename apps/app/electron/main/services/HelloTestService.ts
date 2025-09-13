@@ -3,7 +3,7 @@ import { Service, Action, Event, subscribe } from "../framework";
 import { z } from "zod";
 
 /** ====== 用户服务 ====== */
-@Service()
+@Service("user")
 export class UserService {
   @Action("UserService.getUser", z.string())
   async getUser(id: string) {
