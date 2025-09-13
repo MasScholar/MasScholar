@@ -1,21 +1,33 @@
 {
   "name": "@masscholar/blog",
-  "description": "Modern AI-Powered Statistical Toolkit Blog",
-  "version": "0.0.1",
-  "license": "MIT",
   "type": "module",
+  "version": "1.0.0",
+  "description": "Modern AI-Powered Statistical Toolkit",
+  "packageManager": "pnpm@10.14.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild"
+    ]
+  },
+  "author": "tzha0746 <839730304@qq.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "^20.6.0 || >=22.0.0"
+  },
   "scripts": {
-    "docs:build": "vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
     "docs:dev": "vuepress dev docs",
-    "docs:update-package": "pnpm dlx vp-update"
+    "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
+    "docs:build": "vuepress build docs --clean-cache --clean-temp",
+    "docs:preview": "http-server docs/.vuepress/dist",
+    "vp-update": "pnpm dlx vp-update"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.20",
-    "@vuepress/theme-default": "2.0.0-rc.88",
-    "sass-embedded": "^1.86.0",
-    "vue": "^3.5.13",
-    "vuepress": "2.0.0-rc.20",
-    "@vuepress/plugin-blog": "2.0.0-rc.86"
+    "@vuepress/bundler-vite": "2.0.0-rc.24",
+    "vuepress": "2.0.0-rc.24",
+    "vuepress-theme-plume": "1.0.0-rc.163",
+    "http-server": "^14.1.1",
+    "vue": "^3.5.21",
+    "typescript": "^5.9.2"
   }
 }

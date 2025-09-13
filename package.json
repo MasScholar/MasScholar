@@ -26,6 +26,7 @@
     "add:dep:agent": "pnpm --filter @masscholar/agent add",
     "add:dep:core": "pnpm --filter @masscholar/core add",
     "add:dep:datasource": "pnpm --filter @masscholar/datasource add",
+    "add:dep:blog": "pnpm --filter @masscholar/blog add",
     "add:ui:component": "pnpm --filter @masscholar/ui add:component",
     "cleandep": "rm -rf node_modules target pnpm-lock.yaml && pnpm -r exec rm -rf node_modules"
   },
