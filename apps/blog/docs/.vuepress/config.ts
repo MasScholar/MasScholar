@@ -16,11 +16,6 @@ export default defineUserConfig({
       lang: 'zh-CN',
       description: 'Modern AI-Powered Statistical Toolkit',
     },
-    '/en/': {
-      title: 'MasScholar',
-      lang: 'en-US',
-      description: 'Modern AI-Powered Statistical Toolkit',
-    },
   },
 
   head: [
@@ -49,7 +44,7 @@ export default defineUserConfig({
       pagination: 15,
     },
 
-    /* 博客文章页面链接前缀 */
+    /* Blog Article Link Prefix */
     article: '/article/',
 
     /**
