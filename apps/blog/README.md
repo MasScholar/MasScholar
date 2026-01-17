@@ -1,1 +1,0 @@
-# @masscholar/blog
