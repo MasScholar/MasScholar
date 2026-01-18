@@ -19,6 +19,7 @@
     "test:editor": "",
     "test:ui": "",
     "test:all": "",
+    "generate:preload": "pnpm --filter @masscholar/app run generate:preload",
     "add:dep:app": "pnpm --filter @masscholar/app add",
     "add:dep:ui": "pnpm --filter @masscholar/ui add",
     "add:dep:chart": "pnpm --filter @masscholar/chart add",

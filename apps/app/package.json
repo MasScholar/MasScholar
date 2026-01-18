@@ -16,7 +16,8 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "install:electron": "node node_modules/electron/install.js",
-    "postinstall": "pnpm install:electron"
+    "postinstall": "pnpm install:electron",
+    "generate:preload": "ts-node ./electron/scripts/generate-preload.ts"
   },
   "dependencies": {
     "@iconify-json/radix-icons": "^1.2.2",
