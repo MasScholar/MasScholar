@@ -1,5 +1,7 @@
 {
-  "i18n-ally.localesPaths": ["packages/ms-i18n/src/locales"],
+  "i18n-ally.localesPaths": [
+    "packages/ms-i18n/src/locales"
+  ],
   "i18n-ally.keystyle": "nested",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
@@ -13,7 +15,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
-    "**/node_modules": true,
+    "**/node_modules": false,
     "**/.git": true,
     "**/.rust-analyzer": true,
     "**/.turbo": true,
@@ -31,6 +33,8 @@
     "stores": "folder_redux",
     "lib": "folder_utils"
   },
-  "tailwindCSS.experimental.classRegex": ["class:\\s*?[\"'`]([^\"'`]*).*?,"],
+  "tailwindCSS.experimental.classRegex": [
+    "class:\\s*?[\"'`]([^\"'`]*).*?,"
+  ],
   "gitConfigUser.selectedProfile": "Kaifuny"
 }

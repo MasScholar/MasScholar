@@ -164,3 +164,7 @@ Cargo.lock
 **/.nuxt
 
 **/.DS_Store
+
+*.node
+
+target
