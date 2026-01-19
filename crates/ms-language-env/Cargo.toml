@@ -1,8 +1,0 @@
-[package]
-name = "ms-language-env"
-version = "0.1.0"
-description = "Simulation module for MasScholar"
-authors = ["Kaifuny"]
-edition = "2021"
-
-[dependencies]
