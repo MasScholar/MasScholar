@@ -12,7 +12,6 @@
     "dev:editor": "pnpm --filter @masscholar/editor run dev",
     "build:ui": "pnpm --filter @masscholar/ui run build",
     "build:web": "pnpm --filter @masscholar/web run build",
-    "build:blog": "pnpm --filter @masscholar/blog run docs:build",
     "test:core": "",
     "test:agent": "",
     "test:datasource": "",
@@ -27,7 +26,6 @@
     "add:dep:agent": "pnpm --filter @masscholar/agent add",
     "add:dep:core": "pnpm --filter @masscholar/core add",
     "add:dep:datasource": "pnpm --filter @masscholar/datasource add",
-    "add:dep:blog": "pnpm --filter @masscholar/blog add",
     "add:ui:component": "pnpm --filter @masscholar/ui add:component",
     "cleandep": "rm -rf node_modules target pnpm-lock.yaml && pnpm -r exec rm -rf node_modules"
   },
