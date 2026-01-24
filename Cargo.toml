@@ -1,5 +1,10 @@
 [workspace]
-members = ["crates/ms-*"]
+members = [
+  "crates/ms-core",
+  "crates/ms-database",
+  "crates/ms-simulation",
+  "crates/ms-statistics",
+]
 resolver = "2"
 
 [profile.dev]
