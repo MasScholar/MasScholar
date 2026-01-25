@@ -21,9 +21,9 @@ pnpm dev:app
 ```bash
 ├── apps/
   └── app                 # Client App
-  └── web                 # Portal / Blog / Docs / Manager
 ├── crates/
-  └── ms-language-env     # R / Python
+  └── ms-core             # Core Library
+  └── ms-database         # Database Managment System eg. SQL, NoSQL, file-based DB, csv, json, etc.
   └── ms-simulation       # Simulation
   └── ms-statistics       # Statistics
 ├── packages/
