@@ -1,4 +1,4 @@
-pub fn test() -> i32 {
-  // Placeholder for KV store tests
-  return 100;
-}
+use std::fmt;
+
+/// ==== Crate versions ====
+pub const CORE_VERSION: &str = env!("CARGO_PKG_VERSION");

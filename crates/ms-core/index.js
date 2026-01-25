@@ -576,5 +576,4 @@ if (!nativeBinding) {
 }
 
 module.exports = nativeBinding
-module.exports.minus200 = nativeBinding.minus200
 module.exports.plus200 = nativeBinding.plus200
