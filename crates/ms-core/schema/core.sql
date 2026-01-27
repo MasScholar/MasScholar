@@ -69,12 +69,12 @@ CREATE INDEX ms_checkpoint_job_id_idx ON ms_checkpoint(job_id);
 -- Executor status
 -------------------------------------------
 CREATE TABLE IF NOT EXISTS ms_executor_status (
-  id            TEXT PRIMARY KEY, -- executor ID
-  lane          TEXT NOT NULL,    -- lane name
-  hostname      TEXT NOT NULL,    -- host name
-  pid           INTEGER NOT NULL, -- process ID
-  last_heartbeat INTEGER NOT NULL,-- last heartbeat time
-  created_at    INTEGER NOT NULL   -- created time
+  id            TEXT PRIMARY KEY,   -- executor ID
+  lane          TEXT NOT NULL,      -- lane name
+  hostname      TEXT NOT NULL,      -- host name
+  pid           INTEGER NOT NULL,   -- process ID
+  last_heartbeat INTEGER NOT NULL,  -- last heartbeat time
+  created_at    INTEGER NOT NULL    -- created time
 )
 
 CREATE INDEX ms_executor_status_lane_idx ON ms_executor_status(lane);
