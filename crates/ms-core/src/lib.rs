@@ -1,6 +1,8 @@
 #![deny(clippy::all)]
 use napi_derive::napi;
 
+mod storage;
+
 #[napi]
 pub fn plus_200(input: u32) -> u32 {
   input + 100
