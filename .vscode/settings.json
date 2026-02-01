@@ -31,7 +31,12 @@
   "catppuccin-icons.associations.folders": {
     "electron": "folder_client",
     "stores": "folder_redux",
-    "lib": "folder_utils"
+    "lib": "folder_utils",
+    "schema": "folder_config",
+    "storage": "folder_database",
+    "checkpoint": "folder_content",
+    "runtime": "folder_devcontainer",
+    "scheduler": "folder_composables"
   },
   "tailwindCSS.experimental.classRegex": [
     "class:\\s*?[\"'`]([^\"'`]*).*?,"
