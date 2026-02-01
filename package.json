@@ -13,8 +13,6 @@
     "build:crates:ms-database": "pnpm --filter ms-database run build",
     "build:crates:ms-simulation": "pnpm --filter ms-simulation run build",
     "build:crates:ms-statistics": "pnpm --filter ms-statistics run build",
-    "test:core": "",
-    "test:agent": "",
     "test:datasource": "",
     "test:editor": "",
     "test:ui": "",
@@ -28,8 +26,6 @@
     "add:dep:ui": "pnpm --filter @masscholar/ui add",
     "add:dep:chart": "pnpm --filter @masscholar/chart add",
     "add:dep:editor": "pnpm --filter @masscholar/editor add",
-    "add:dep:agent": "pnpm --filter @masscholar/agent add",
-    "add:dep:core": "pnpm --filter @masscholar/core add",
     "add:dep:datasource": "pnpm --filter @masscholar/datasource add",
     "add:ui:component": "pnpm --filter @masscholar/ui add:component",
     "cleandep": "rm -rf node_modules target pnpm-lock.yaml && pnpm -r exec rm -rf node_modules"
