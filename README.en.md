@@ -22,22 +22,20 @@ pnpm dev:app
 
 ```bash
 ├── apps/
-│ └── app # Client App
+  └── app                 # Client App
 ├── crates/
-│ ├── ms-core # Core Library
-│ ├── ms-database # Database Management System (SQL, NoSQL, file-based DBs, CSV, JSON, etc.)
-│ ├── ms-simulation # Simulation
-│ └── ms-statistics # Statistics
+  └── ms-core             # Core Library
+  └── ms-database         # Database Managment System eg. SQL, NoSQL, file-based DB, csv, json, etc.
+  └── ms-simulation       # Simulation
+  └── ms-statistics       # Statistics
+  └── ms-operator         # Operator
 ├── packages/
-│ ├── ms-agent # AI Agent
-│ ├── ms-chart # Charting
-│ ├── ms-editor # Editor
-│ ├── ms-core # Framework Core for Electron App
-│ ├── ms-datasource # Data Sources (SQLite, MySQL, PostgreSQL, etc.)
-│ ├── ms-i18n # Internationalization
-│ └── ms-ui # UI Components for Electron / Web Apps
-├── vendor/
-│ └── third-party libraries
+  └── ms-chart            # Chart
+  └── ms-editor           # Editor
+  └── ms-i18n             # Internationalization
+  └── ms-ui               # Ui Component for Electron App / Web App
+├── vender/
+  └── something third party
 ├── package.json
 ├── pnpm-workspace.yaml
 ├── README.md

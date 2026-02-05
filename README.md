@@ -26,12 +26,10 @@ pnpm dev:app
   └── ms-database         # Database Managment System eg. SQL, NoSQL, file-based DB, csv, json, etc.
   └── ms-simulation       # Simulation
   └── ms-statistics       # Statistics
+  └── ms-operator         # Operator
 ├── packages/
-  └── ms-agent            # Ai Agent
   └── ms-chart            # Chart
   └── ms-editor           # Editor
-  └── ms-core             # Framework Core for Electron App
-  └── ms-datasource       # Data Source e.g. SQLite, MySQL, PostgreSQL, etc.
   └── ms-i18n             # Internationalization
   └── ms-ui               # Ui Component for Electron App / Web App
 ├── vender/
