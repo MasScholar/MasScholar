@@ -4,20 +4,20 @@
 -- Command Table
 -------------------------------------------
 CREATE TABLE IF NOT EXISTS ms_command (
-  id            TEXT PRIMARY KEY, -- ULID
-  domain        TEXT NOT NULL,    -- ui / database / statistics / simulation
-  action        TEXT NOT NULL,    -- run / analyze / click / etc
-  payload_json  TEXT NOT NULL,    -- DSL / 参数（JSON）
-  version        TEXT,        -- command schema / DSL version
-  idempotency_key TEXT,       -- optional, for deduplication
+  id              TEXT PRIMARY KEY, -- ULID
+  domain          TEXT NOT NULL,    -- ui / database / statistics / simulation
+  action          TEXT NOT NULL,    -- run / analyze / click / etc
+  payload_json    TEXT NOT NULL,    -- DSL / 参数（JSON）
+  version         TEXT,             -- command schema / DSL version
+  idempotency_key TEXT,             -- optional, for deduplication
 
-  exec_policy   TEXT NOT NULL,    -- sync / async / parallel / scheduled / interval
-  safety_policy TEXT NOT NULL,    -- rollback / cancelable / readonly
-  state         TEXT NOT NULL,    -- created / accepted / finished / failed
+  exec_policy     TEXT NOT NULL,    -- sync / async / parallel / scheduled / interval
+  safety_policy   TEXT NOT NULL,    -- rollback / cancelable / readonly
+  state           TEXT NOT NULL,    -- created / accepted / finished / failed
 
-  created_at    INTEGER NOT NULL, -- created time
-  accepted_at   INTEGER,          -- accepted time
-  finished_at   INTEGER,          -- finished time
+  created_at      INTEGER NOT NULL, -- created time
+  accepted_at     INTEGER,          -- accepted time
+  finished_at     INTEGER,          -- finished time
 )
 
 CREATE INDEX ms_command_state_idx ON ms_command(state);
