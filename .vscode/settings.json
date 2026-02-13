@@ -15,7 +15,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
-    "**/node_modules": false,
+    "**/node_modules": true,
     "**/.git": true,
     "**/.rust-analyzer": true,
     "**/.turbo": true,
@@ -36,7 +36,8 @@
     "storage": "folder_database",
     "checkpoint": "folder_content",
     "runtime": "folder_devcontainer",
-    "scheduler": "folder_composables"
+    "scheduler": "folder_composables",
+    "vendor": "folder_git",
   },
   "tailwindCSS.experimental.classRegex": [
     "class:\\s*?[\"'`]([^\"'`]*).*?,"
