@@ -16,7 +16,7 @@ const selectedTab = 'statistical'
 <template>
   <div class="flex flex-col items-center w-full h-full p-2">
     <MsCategoryTabs :tabs="tabs" :default-value="selectedTab" />
-    <ScrollArea class="w-full flex-grow">
+    <ScrollArea class="w-full grow">
       <div class="p-4">
         <div class="text-center text-gray-500 dark:text-gray-400">
           <p class="text-lg mb-2">统计相关内容</p>
