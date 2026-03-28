@@ -5,7 +5,7 @@
   "author": "Kaifuny",
   "license": "AGPL-3.0-only",
   "dependencies": {
-    "skia-canvas": "^2.0.2"
+    "skia-canvas": "^3.0.8"
   },
   "devDependencies": {}
 }
