@@ -20,8 +20,6 @@ import ScrollArea from "./ui/scroll-area/ScrollArea.vue";
 import Switch from "./ui/switch/Switch.vue";
 // MasScholar/app
 
-// MasScholar/web
-
 export {
   // Shadcn/ui
   Switch,
