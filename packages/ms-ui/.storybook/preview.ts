@@ -1,13 +1,6 @@
 import type { Preview } from "@storybook/vue3-vite";
 
-import { setup } from "@storybook/vue3-vite";
 import "../src/style.css";
-
-setup((app) => {
-  app.mixin({
-    // My mixin
-  });
-});
 
 const preview: Preview = {
   parameters: {

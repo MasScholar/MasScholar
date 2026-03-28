@@ -6,17 +6,15 @@ import dts from 'vite-plugin-dts';
 import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath, URL } from 'url';
 // https://vite.dev/config/
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
-var dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
+const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
     plugins: [vue(), tailwindcss(), dts({
             include: ['src/**/*.{vue,ts,tsx}'],
             outDir: ['dist/types'],
-            beforeWriteFile: function (filePath, content) { return ({
+            beforeWriteFile: (filePath, content) => ({
                 filePath: filePath.replace('/src/', '/'),
-                content: content
-            }); }
+                content
+            })
         })],
     build: {
         target: 'esnext',
@@ -26,8 +24,8 @@ export default defineConfig({
         lib: {
             entry: path.resolve(import.meta.dirname, 'src/index.ts'),
             formats: ['es', 'cjs'],
-            fileName: function (format) {
-                return "".concat(format === 'es' ? 'esm' : 'cjs', "/[name].").concat(format === 'es' ? 'mjs' : 'js');
+            fileName: format => {
+                return `${format === 'es' ? 'esm' : 'cjs'}/[name].${format === 'es' ? 'mjs' : 'js'}`;
             },
             cssFileName: 'style'
         },
@@ -48,30 +46,6 @@ export default defineConfig({
         alias: [{
                 find: '@',
                 replacement: fileURLToPath(new URL('./src', import.meta.url))
-            }]
-    },
-    test: {
-        projects: [{
-                extends: true,
-                plugins: [
-                    // The plugin will run tests for the stories defined in your Storybook config
-                    // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-                    storybookTest({
-                        configDir: path.join(dirname, '.storybook')
-                    })
-                ],
-                test: {
-                    name: 'storybook',
-                    browser: {
-                        enabled: true,
-                        headless: true,
-                        provider: 'playwright',
-                        instances: [{
-                                browser: 'chromium'
-                            }]
-                    },
-                    setupFiles: ['.storybook/vitest.setup.ts']
-                }
             }]
     }
 });

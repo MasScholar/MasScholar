@@ -1,5 +1,510 @@
-# MasScholar UI
+import { Meta } from "@storybook/addon-docs/blocks";
 
-## Introduction
+<Meta title="MasScholar UI/Introduction" />
 
-MasScholar UI is a web-based user interface for the MasScholar project. It provides a graphical interface for users to interact with the MasScholar system.
+<div className="sb-container">
+  <div className="hero-section">
+    <div className="hero-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      <span>基于 shadcn/vue 构建</span>
+    </div>
+    <h1 className="hero-title">MasScholar UI</h1>
+    <div className="hero-description">
+      一个现代化、可访问的企业级 Vue 3 组件库，为 MasScholar 项目提供精美的用户界面解决方案。
+    </div>
+    <div className="hero-actions">
+      <a href="/?path=/docs/masscholar-ui-button--docs" className="btn-primary">
+        浏览组件
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="https://github.com" className="btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div className="features-section">
+    <h2 className="section-title">核心特性</h2>
+    <div className="features-grid">
+      <div className="feature-card">
+        <div className="feature-icon blue">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        <h3>丰富的组件</h3>
+        <div className="feature-text">50+ 精心设计的组件，覆盖表单、数据展示、导航、反馈等常见场景</div>
+      </div>
+
+      <div className="feature-card">
+        <div className="feature-icon purple">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+        </div>
+        <h3>主题定制</h3>
+        <div className="feature-text">基于 Tailwind CSS 构建，支持深色模式和多主题切换</div>
+      </div>
+
+      <div className="feature-card">
+        <div className="feature-icon green">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="16" cy="4" r="1" transform="rotate(90 16 4)"/><path d="m5 20 5-5"/><path d="m11 13 3-3"/><path d="m13 11 4-4"/><circle cx="8" cy="9" r="1" transform="rotate(90 8 9)"/><circle cx="4" cy="13" r="1" transform="rotate(90 4 13)"/></svg>
+        </div>
+        <h3>可访问性</h3>
+        <div className="feature-text">遵循 WAI-ARIA 标准，支持键盘导航和屏幕阅读器</div>
+      </div>
+
+      <div className="feature-card">
+        <div className="feature-icon orange">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>高性能</h3>
+        <div className="feature-text">基于 Vue 3 Composition API，支持 Tree-shaking 和懒加载</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div className="categories-section">
+    <h2 className="section-title">组件分类</h2>
+    <div className="categories-grid">
+      <a href="/?path=/docs/masscholar-ui-button--docs" className="category-card">
+        <div className="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>
+        </div>
+        <div className="category-info">
+          <h4>基础组件</h4>
+          <span>Button, Badge, Card, Avatar...</span>
+        </div>
+      </a>
+
+      <a href="/?path=/docs/masscholar-ui-input--docs" className="category-card">
+        <div className="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </div>
+        <div className="category-info">
+          <h4>表单组件</h4>
+          <span>Input, Select, Checkbox, Form...</span>
+        </div>
+      </a>
+
+      <a href="/?path=/docs/masscholar-ui-dialog--docs" className="category-card">
+        <div className="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+        </div>
+        <div className="category-info">
+          <h4>反馈组件</h4>
+          <span>Dialog, Toast, Alert, Sonner...</span>
+        </div>
+      </a>
+
+      <a href="/?path=/docs/masscholar-ui-sidebar--docs" className="category-card">
+        <div className="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+        </div>
+        <div className="category-info">
+          <h4>布局组件</h4>
+          <span>Sidebar, Sheet, Resizable...</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <div className="quickstart-section">
+    <h2 className="section-title">快速开始</h2>
+    <div className="quickstart-content">
+      <div className="code-block">
+        <div className="code-header">
+          <span>安装组件</span>
+        </div>
+        <pre>
+          <code>pnpm dlx shadcn-vue@latest add button</code>
+        </pre>
+      </div>
+
+      <div className="code-block">
+        <div className="code-header">
+          <span>使用组件</span>
+        </div>
+        <pre>
+          <code>{`<script setup lang="ts">
+
+import { Button } from '@/components/ui/button'
+<\/script>
+
+<template>
+  <Button>点击我</Button>
+</template>`}</code>
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <div className="docs-section">
+    <h2 className="section-title">相关资源</h2>
+    <div className="docs-grid">
+      <a href="https://ui.shadcn.com" target="_blank" className="doc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+        <span>shadcn/ui 文档</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="https://www.radix-vue.com" target="_blank" className="doc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Radix Vue 文档</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="https://tailwindcss.com" target="_blank" className="doc-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+        <span>Tailwind CSS 文档</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>{`
+  .sb-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 24px;
+    margin-bottom: 60px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-title {
+    font-size: 56px;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    letter-spacing: -2px;
+    position: relative;
+  }
+
+  .hero-description {
+    font-size: 20px;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    position: relative;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    position: relative;
+  }
+
+  .btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: white;
+    color: #667eea;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    color: #1a1a2e;
+  }
+
+  .features-section {
+    margin-bottom: 60px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.2s ease;
+  }
+
+  .feature-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .feature-icon.blue {
+    background: #eff6ff;
+    color: #3b82f6;
+  }
+
+  .feature-icon.purple {
+    background: #faf5ff;
+    color: #a855f7;
+  }
+
+  .feature-icon.green {
+    background: #f0fdf4;
+    color: #22c55e;
+  }
+
+  .feature-icon.orange {
+    background: #fff7ed;
+    color: #f97316;
+  }
+
+  .feature-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #1a1a2e;
+  }
+
+  .feature-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .categories-section {
+    margin-bottom: 60px;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .category-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .category-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  }
+
+  .category-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .category-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #1a1a2e;
+  }
+
+  .category-info span {
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  .quickstart-section {
+    margin-bottom: 60px;
+  }
+
+  .quickstart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .code-block {
+    background: #1a1a2e;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .code-header {
+    background: #252542;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #a0a0b0;
+    border-bottom: 1px solid #333350;
+  }
+
+  .code-block pre {
+    margin: 0;
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .code-block code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e4e4e7;
+  }
+
+  .docs-section {
+    margin-bottom: 40px;
+  }
+
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .doc-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #374151;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .doc-card:hover {
+    border-color: #667eea;
+    color: #667eea;
+  }
+
+  .doc-card svg:last-child {
+    margin-left: auto;
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+
+  .doc-card:hover svg:last-child {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .section-title {
+      color: #f3f4f6;
+    }
+
+    .feature-card, .category-card, .doc-card {
+      background: #1f2937;
+      border-color: #374151;
+    }
+
+    .feature-card h3, .category-info h4 {
+      color: #f3f4f6;
+    }
+
+    .feature-text, .category-info span {
+      color: #9ca3af;
+    }
+
+    .doc-card {
+      color: #d1d5db;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 36px;
+    }
+
+    .hero-description {
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+`}</style>

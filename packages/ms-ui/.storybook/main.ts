@@ -28,7 +28,7 @@ const config: StorybookConfig = {
     options: {
       docgen: {
         plugin: "vue-component-meta",
-        tsconfig: "tsconfig.app.json",
+        tsconfig: "tsconfig.json",
       },
     },
   },

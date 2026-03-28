@@ -24,7 +24,6 @@
     /* Vue JSX*/
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
@@ -35,10 +34,10 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/**/*.stories.ts"
+    "src/**/*.vue"
   ],
-  "ignore": [
+  "exclude": [
+    "src/stories/**/*",
     "node_modules"
   ],
   "references": [
