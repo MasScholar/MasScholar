@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { MsThemeToggle } from '@masscholar/ui'
+import { MsThemeToggle } from '@/components/app'
 
 const meta = {
   title: 'Components/MsThemeToggle',

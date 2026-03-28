@@ -32,6 +32,15 @@ const config: StorybookConfig = {
       },
     },
   },
+  viteFinal: async (config) => {
+    const { fileURLToPath, URL } = await import('url');
+
+    config.resolve = config.resolve || {};
+    config.resolve.alias = config.resolve.alias || {};
+    (config.resolve.alias as any)['@'] = fileURLToPath(new URL('./src', import.meta.url));
+
+    return config;
+  },
 };
 
 export default config;

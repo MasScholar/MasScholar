@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { MsButton } from '@masscholar/ui'
+import { MsButton } from '@/components/app'
 
 const meta = {
   title: 'Components/MsButton',

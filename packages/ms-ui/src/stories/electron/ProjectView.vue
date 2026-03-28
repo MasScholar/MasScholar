@@ -11,7 +11,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
   SidebarProvider
-} from '@masscholar/ui'
+} from '@/components/ui/sidebar'
 
 const items = [
   {

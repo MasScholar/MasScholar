@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { MsRecentItem } from '@masscholar/ui'
+import { MsRecentItem } from '@/components/app'
 
 const meta = {
   title: 'Components/MsRecentItem',

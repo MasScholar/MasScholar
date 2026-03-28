@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ScrollArea, MsCategoryTabs } from '@masscholar/ui'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { MsCategoryTabs } from '@/components/app'
 
 const tabs = [
   { value: 'statistical', label: '统计相关', disabled: false },

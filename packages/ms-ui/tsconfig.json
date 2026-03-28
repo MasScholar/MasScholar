@@ -37,7 +37,6 @@
     "src/**/*.vue"
   ],
   "exclude": [
-    "src/stories/**/*",
     "node_modules"
   ],
   "references": [

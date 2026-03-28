@@ -74,15 +74,18 @@ const getIconSize = (size: string): ButtonVariants["size"] => {
   <Button :variant="getButtonVariant(variant)" :size="mode === 'icon' ? getIconSize(size) : getButtonSize(size)"
     :disabled="disabled || loading" :class="[
       className,
+      'group',
       // 为 mini 尺寸添加更小的样式
       { 'h-7 text-xs px-2 has-[>svg]:px-2': size === 'mini' && mode !== 'icon' },
       // 为 mini 图标按钮添加固定大小
       { 'size-7': size === 'mini' && mode === 'icon' },
       // 为 primary 变体添加特定样式
-      { 'bg-blue-600 hover:bg-blue-700 text-white': variant === 'primary' },
+      { 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md': variant === 'primary' },
+      // 为 outline 变体添加特定样式
+      { 'hover:bg-gray-100 hover:text-gray-900 hover:border-gray-300 dark:hover:bg-gray-700 dark:hover:text-white dark:hover:border-gray-600': variant === 'outline' },
       // 为 ghost-primary 和 ghost-danger 添加特定样式
-      { 'text-blue-600 hover:text-blue-700': variant === 'ghost-primary' },
-      { 'text-red-600 hover:text-red-700': variant === 'ghost-danger' }
+      { 'text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950': variant === 'ghost-primary' },
+      { 'text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950': variant === 'ghost-danger' }
     ]" @click="handleClick">
     <!-- Loading spinner -->
     <template v-if="loading">
@@ -108,7 +111,9 @@ const getIconSize = (size: string): ButtonVariants["size"] => {
             'size-4': size === 'small',
             'size-5': size === 'default',
             'size-6': size === 'large',
-          }"></span>
+            'transition-transform duration-200 group-hover:scale-110 group-hover:-translate-x-0.5': mode === 'icon-text',
+            'transition-transform duration-200 group-hover:scale-110 group-hover:rotate-6': mode === 'icon'
+          }" class="group-hover:inline-block"></span>
         </template>
         <!-- 支持图标名称（预留） -->
         <svg v-else-if="icon" :class="{
@@ -116,6 +121,8 @@ const getIconSize = (size: string): ButtonVariants["size"] => {
           'size-4': size === 'small',
           'size-5': size === 'default',
           'size-6': size === 'large',
+          'transition-transform duration-200 group-hover:scale-110 group-hover:-translate-x-0.5': mode === 'icon-text',
+          'transition-transform duration-200 group-hover:scale-110 group-hover:rotate-6': mode === 'icon'
         }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -124,7 +131,7 @@ const getIconSize = (size: string): ButtonVariants["size"] => {
     </template>
 
     <!-- Text content -->
-    <span v-if="(mode === 'text' || mode === 'icon-text') && !loading">
+    <span v-if="(mode === 'text' || mode === 'icon-text') && !loading" class="transition-colors duration-200">
       <slot />
     </span>
   </Button>

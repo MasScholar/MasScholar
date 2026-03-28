@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ArrowRight, BookOpen, Plus, Folder, Settings } from 'lucide-vue-next'
-import { ScrollArea } from '@masscholar/ui'
-import { MsButton, MsThemeToggle, MsRecentItem, MsLanguageToggle, MsVersionInfo } from '@masscholar/ui'
-import placeholder from './placeholder.svg'
+import { ArrowRight, BookOpen, Plus, Folder, Settings, BarChart, Brain, Droplet, Building2, Leaf } from 'lucide-vue-next'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { MsButton, MsThemeToggle, MsRecentItem, MsLanguageToggle, MsVersionInfo } from '@/components/app'
+// import placeholder from './placeholder.svg'
 import { useColorMode } from '@vueuse/core'
 
 const theme_mode = useColorMode()
@@ -12,26 +12,41 @@ const recently_used_list = [
     uid: '1',
     name: '市场调研数据统计实践',
     type: 'Project',
+    icon: BarChart,
+    iconColor: '#2563EB',
+    bgColor: '#DBEAFE',
   },
   {
     uid: '2',
     name: '心理学实验数据分析范例',
     type: 'Tutorial',
+    icon: Brain,
+    iconColor: '#7C3AED',
+    bgColor: '#EDE9FE',
   },
   {
     uid: '3',
     name: '农田水分管理数据描述统计与推断',
     type: 'Project',
+    icon: Droplet,
+    iconColor: '#0891B2',
+    bgColor: '#CFFAFE',
   },
   {
     uid: '4',
     name: '智慧城市交通流量预测模型',
     type: 'Project',
+    icon: Building2,
+    iconColor: '#EA580C',
+    bgColor: '#FFEDD5',
   },
   {
     uid: '5',
     name: '农田环境统计分析及报告生成',
     type: 'Project',
+    icon: Leaf,
+    iconColor: '#16A34A',
+    bgColor: '#DCFCE7',
   },
 ]
 
@@ -109,7 +124,8 @@ function handleClickSettings() {
     </div>
     <ScrollArea class="flex flex-col flex-grow h-screen p-2 bg-white dark:bg-gray-700 mt-10">
       <MsRecentItem v-for="recently_used in recently_used_list" :key="recently_used.uid" :name="recently_used.name"
-        :type="recently_used.type" time="1 min before" :image="placeholder" />
+        :type="recently_used.type" time="1 min before" :icon="recently_used.icon" :icon-color="recently_used.iconColor"
+        :bg-color="recently_used.bgColor" />
     </ScrollArea>
   </div>
 </template>

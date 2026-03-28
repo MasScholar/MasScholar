@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { MsCategoryTabs } from '@masscholar/ui'
+import type { StoryObj } from '@storybook/vue3-vite'
+import { MsCategoryTabs } from '@/components/app'
 
 const meta = {
   title: 'Components/MsCategoryTabs',

@@ -240,7 +240,7 @@ describe("MsComponentName", () => {
 
 ```typescript
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
-import { MsComponentName } from "@masscholar/ui";
+import { MsComponentName } from "@/components/app";
 
 const meta = {
   title: "Components/MsComponentName",

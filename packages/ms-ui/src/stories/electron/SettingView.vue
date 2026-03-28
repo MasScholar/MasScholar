@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MsSettingsTabs } from '@masscholar/ui'
+import { MsSettingsTabs } from '@/components/app'
 
 const tabs = [
   { value: 'account', label: '账户' },
