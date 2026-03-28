@@ -7,10 +7,10 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "vue-i18n": "^11.1.2"
+    "vue-i18n": "^11.3.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.3"
   },
   "exports": {
     ".": {
