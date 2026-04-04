@@ -1,9 +1,9 @@
 [package]
 name = "ms-cli"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 ms-core = { path = "../ms-core" }
-clap = "4"
-anyhow = "1"
+clap = "4.5.4"
+anyhow = "1.0.86"
