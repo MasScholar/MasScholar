@@ -42,5 +42,8 @@
   "tailwindCSS.experimental.classRegex": [
     "class:\\s*?[\"'`]([^\"'`]*).*?,"
   ],
-  "gitConfigUser.selectedProfile": "Kaifuny"
+  "gitConfigUser.selectedProfile": "Kaifuny",
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  }
 }
