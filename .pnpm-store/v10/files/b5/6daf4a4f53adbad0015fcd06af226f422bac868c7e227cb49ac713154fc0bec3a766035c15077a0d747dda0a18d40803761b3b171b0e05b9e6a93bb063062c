@@ -1,0 +1,66 @@
+// src/index.ts
+import { build, dev } from "@doubleshot/builder";
+import { defineConfig } from "@doubleshot/builder";
+function resolveRendererUrl(server) {
+  var _a, _b, _c;
+  const address = (_a = server.httpServer) == null ? void 0 : _a.address();
+  if (!address || typeof address === "string")
+    return ((_b = server.resolvedUrls) == null ? void 0 : _b.local[0]) ?? ((_c = server.resolvedUrls) == null ? void 0 : _c.network[0]);
+  const protocol = server.config.server.https ? "https" : "http";
+  const base = server.config.base.startsWith("/") ? server.config.base : `/${server.config.base}`;
+  const hostOption = server.config.server.host;
+  const host = hostOption && hostOption !== true ? String(hostOption) : address.address;
+  const normalizedHost = host === "::" || host === "0.0.0.0" ? "localhost" : host;
+  const hostname = normalizedHost.includes(":") && !normalizedHost.startsWith("[") ? `[${normalizedHost}]` : normalizedHost;
+  return `${protocol}://${hostname}:${address.port}${base}`;
+}
+function VitePluginDoubleshot(userConfig = {}) {
+  const PLUGIN_NAME = "vite-plugin-doubleshot";
+  let pack;
+  let viteMode = "development";
+  const configureForMode = async (resolvedConfig) => {
+    const { mode } = resolvedConfig;
+    viteMode = mode;
+    if (typeof userConfig.configureForMode === "function") {
+      await userConfig.configureForMode(userConfig, mode);
+    }
+  };
+  const isDebug = process.argv.includes("--dsb-debug");
+  userConfig.debug = isDebug;
+  return [
+    {
+      name: `${PLUGIN_NAME}:serve`,
+      apply: "serve",
+      configResolved: async (resolvedConfig) => {
+        await configureForMode(resolvedConfig);
+      },
+      configureServer(server) {
+        var _a;
+        if (viteMode !== "development")
+          return;
+        (_a = server == null ? void 0 : server.httpServer) == null ? void 0 : _a.once("listening", async () => {
+          var _a2, _b;
+          if (!userConfig.rendererUrl) {
+            userConfig.rendererUrl = resolveRendererUrl(server) ?? ((_a2 = server.resolvedUrls) == null ? void 0 : _a2.local[0]) ?? ((_b = server.resolvedUrls) == null ? void 0 : _b.network[0]);
+          }
+          await dev(userConfig);
+        });
+      }
+    },
+    {
+      name: `${PLUGIN_NAME}:build`,
+      apply: "build",
+      async configResolved(resolvedConfig) {
+        await configureForMode(resolvedConfig);
+        pack = await build(userConfig, false);
+      },
+      async closeBundle() {
+        await (pack == null ? void 0 : pack());
+      }
+    }
+  ];
+}
+export {
+  VitePluginDoubleshot,
+  defineConfig
+};

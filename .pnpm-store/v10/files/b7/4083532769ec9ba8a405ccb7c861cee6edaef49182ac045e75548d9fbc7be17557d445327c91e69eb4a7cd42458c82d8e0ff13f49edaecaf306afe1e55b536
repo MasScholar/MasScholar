@@ -1,0 +1,186 @@
+import { Configuration, CliOptions } from 'electron-builder';
+import { Options } from 'tsup';
+
+type LogType = 'info' | 'success' | 'error' | 'warn';
+
+type AppType = 'node' | 'electron';
+type UserConfigExport = UserConfig | Promise<UserConfig>;
+interface ElectronBuildConfig {
+    /**
+     * @default false
+     */
+    disabled?: boolean;
+    /**
+     * electron-builder config or electron-builder config file path
+     */
+    config?: string | Configuration;
+    /**
+     * electron-builder cli config
+     */
+    cliOptions?: CliOptions;
+    /**
+     * Will be executed when electron-builder build is complete
+     */
+    afterBuild?: () => Promise<void>;
+}
+type TsupConfig = Omit<Options, 'entry' | 'outDir' | 'tsconfig' | 'external' | 'onSuccess'> & {
+    onSuccess?: () => Promise<any>;
+};
+type UserTsupConfig = Pick<Options, 'outDir' | 'tsconfig' | 'external'> & {
+    /**
+     * entry file, only support single file
+     */
+    entry?: string;
+    /**
+     * tsup config file path, or tsup config object
+     * @note 'entry' will be ignored
+     */
+    tsupConfig?: string | TsupConfig;
+};
+type PreloadTsupConfig = Pick<Options, 'outDir' | 'tsconfig' | 'external'> & {
+    /**
+     *  preload file entry points, support multiple files
+     */
+    entry?: string | string[];
+    /**
+     * tsup config file path, or tsup config object
+     * @note 'entry' will be ignored
+     */
+    tsupConfig?: string | TsupConfig;
+};
+interface ElectronConfig {
+    /**
+     * The build configuration of the preload file
+     */
+    preload?: PreloadTsupConfig;
+    /**
+     * electron-builder configuration
+     */
+    build?: ElectronBuildConfig;
+    /**
+     * Renderer process url on development mode
+     */
+    rendererUrl?: string | string[];
+    /**
+     * whether to wait for the renderer process ready
+     */
+    waitForRenderer?: boolean;
+    /**
+     * wait for the renderer process ready timeout
+     */
+    waitTimeout?: number;
+}
+interface DevArgs {
+    node?: string[];
+    electron?: string[];
+}
+interface DebugConfig {
+    enabled?: boolean;
+    args?: string[] | DevArgs;
+    env?: Record<string, string>;
+    sourcemapType?: 'file' | 'inline';
+    buildOnly?: boolean;
+}
+interface UserConfig extends UserTsupConfig {
+    /**
+     * App type, 'node' or 'electron'
+     * @default 'node'
+     */
+    type?: AppType;
+    /**
+     * The entry of the application
+     * @default 'package.json'.main
+     */
+    main?: string;
+    /**
+     * Arguments passed to the command in development mode
+     */
+    args?: string[] | DevArgs;
+    /**
+     * Only prebuild files and won't run the application in development mode
+     * @default false
+     */
+    buildOnly?: boolean;
+    /**
+     * Skip prebuild and run the application
+     * @default false
+     */
+    runOnly?: boolean;
+    /**
+     * Some configuration for electron
+     */
+    electron?: ElectronConfig;
+    /**
+     * Will be executed when tsup build is complete
+     */
+    afterBuild?: () => Promise<void>;
+    /**
+     * Debug configuration
+     */
+    debugCfg?: DebugConfig;
+}
+interface InlineConfig extends UserConfig {
+    /**
+     * Specify doubleshot builder config file
+     * if set to false, will not load config file
+     */
+    configFile?: string | false;
+    /**
+     * preload file entry
+     */
+    preload?: string;
+    /**
+     * electron-builder config file
+     */
+    electronBuilderConfig?: string;
+    /**
+     * Renderer process url on development mode
+     */
+    rendererUrl?: string | string[];
+    /**
+     * whether to wait for the renderer process ready
+     */
+    waitForRenderer?: boolean;
+    /**
+     * wait for the renderer process ready timeout
+     */
+    waitTimeout?: number;
+    /**
+     * Run in debug mode
+     */
+    debug?: boolean;
+}
+type ResolvedConfig = Readonly<{
+    cwd: string;
+    type: AppType;
+    main: string;
+    args: string[] | DevArgs;
+    buildOnly: boolean;
+    runOnly: boolean;
+    debugCfg: DebugConfig;
+    tsupConfigs: Options[];
+    electron: Omit<ElectronConfig, 'preload'>;
+} & Pick<UserConfig, 'afterBuild'>>;
+/**
+ * Type helper to make it easier to use dsb.config.ts
+ */
+declare function defineConfig(config: UserConfigExport): UserConfigExport;
+/**
+ * Resolve config
+ */
+declare function resolveConfig(inlineConfig: InlineConfig, cwd?: string): Promise<ResolvedConfig>;
+
+declare function build(inlineConfig?: InlineConfig, autoPack?: boolean): Promise<(() => Promise<void>) | undefined>;
+declare function dev(inlineConfig?: InlineConfig): Promise<void>;
+
+declare const logger: {
+    setName(_name: string): void;
+    success(label: string, ...args: any[]): void;
+    info(label: string, ...args: any[]): void;
+    error(label: string, ...args: any[]): void;
+    warn(label: string, ...args: any[]): void;
+    log(label: string, type: "info" | "success" | "error" | "warn", ...data: unknown[]): void;
+};
+declare function printLog(type: LogType, ...args: any[]): void;
+
+export { type AppType, type DebugConfig, type DevArgs, type ElectronBuildConfig, type ElectronConfig, type InlineConfig, type PreloadTsupConfig, type ResolvedConfig, type TsupConfig, type UserConfig, type UserConfigExport, type UserTsupConfig, build, defineConfig, dev, logger, printLog, resolveConfig };

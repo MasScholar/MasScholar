@@ -1,0 +1,25 @@
+"use strict";Object.defineProperty(exports, "__esModule", {value: true});
+
+
+
+
+var _chunkCCN377ZAjs = require('./chunk-CCN377ZA.js');
+
+
+
+var _chunk5BEOWWH4js = require('./chunk-5BEOWWH4.js');
+
+// src/index.ts
+var logger = _chunk5BEOWWH4js.createLogger.call(void 0, );
+function printLog(type, ...args) {
+  if (typeof logger[type] === "function")
+    logger[type].apply(logger, [_chunk5BEOWWH4js.TAG, ...args]);
+}
+
+
+
+
+
+
+
+exports.build = _chunkCCN377ZAjs.build; exports.defineConfig = _chunkCCN377ZAjs.defineConfig; exports.dev = _chunkCCN377ZAjs.dev; exports.logger = logger; exports.printLog = printLog; exports.resolveConfig = _chunkCCN377ZAjs.resolveConfig;

@@ -1,0 +1,58 @@
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } }// src/constants.ts
+var TAG = "DSB";
+var CONFIG_FILE = "dsb.config";
+
+// src/log.ts
+var _colorette = require('colorette'); var colors = _interopRequireWildcard(_colorette);
+function colorize(type, data, onlyImportant = false) {
+  if (onlyImportant && (type === "info" || type === "success"))
+    return data;
+  const color = type === "info" ? "blue" : type === "error" ? "red" : type === "warn" ? "yellow" : "green";
+  return colors[color](data);
+}
+function makeLabel(name, input, type) {
+  return [
+    name && `${colors.dim("[")}${name.toUpperCase()}${colors.dim("]")}`,
+    colorize(type, input.toUpperCase())
+  ].filter(Boolean).join(" ");
+}
+function createLogger(name) {
+  return {
+    setName(_name) {
+      name = _name;
+    },
+    success(label, ...args) {
+      return this.log(label, "success", ...args);
+    },
+    info(label, ...args) {
+      return this.log(label, "info", ...args);
+    },
+    error(label, ...args) {
+      return this.log(label, "error", ...args);
+    },
+    warn(label, ...args) {
+      return this.log(label, "warn", ...args);
+    },
+    log(label, type, ...data) {
+      switch (type) {
+        case "error": {
+          return console.error(
+            makeLabel(name, label, type),
+            ...data.map((item) => colorize(type, item, true))
+          );
+        }
+        default:
+          console.log(
+            makeLabel(name, label, type),
+            ...data.map((item) => colorize(type, item, true))
+          );
+      }
+    }
+  };
+}
+
+
+
+
+
+exports.TAG = TAG; exports.CONFIG_FILE = CONFIG_FILE; exports.createLogger = createLogger;
