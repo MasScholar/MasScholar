@@ -170,13 +170,14 @@ import { Button } from '@/components/ui/button'
 
   .hero-section {
     text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 24px;
-    margin-bottom: 60px;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+    border-radius: 32px;
+    margin-bottom: 80px;
     color: white;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.25);
   }
 
   .hero-section::before {
@@ -186,9 +187,19 @@ import { Button } from '@/components/ui/button'
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.3;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.4;
+    animation: float 20s linear infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50px, -50px) rotate(360deg);
+    }
   }
 
   .hero-badge {
@@ -196,109 +207,170 @@ import { Button } from '@/components/ui/button'
     align-items: center;
     gap: 8px;
     background: rgba(255,255,255,0.2);
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 50px;
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 24px;
-    backdrop-filter: blur(10px);
+    margin-bottom: 32px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .hero-badge:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
   }
 
   .hero-title {
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 800;
-    margin: 0 0 16px 0;
+    margin: 0 0 20px 0;
     letter-spacing: -2px;
     position: relative;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
   .hero-description {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.6;
-    opacity: 0.9;
+    opacity: 0.95;
     max-width: 600px;
-    margin: 0 auto 32px;
+    margin: 0 auto 40px;
     position: relative;
   }
 
   .hero-actions {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     justify-content: center;
     position: relative;
+    flex-wrap: wrap;
   }
 
   .btn-primary, .btn-secondary {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    border-radius: 12px;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 16px;
     font-weight: 600;
     font-size: 16px;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
 
   .btn-primary {
     background: white;
-    color: #667eea;
+    color: #4f46e5;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
   }
 
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.3);
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
   }
 
   .btn-secondary {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
     color: white;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
   }
 
   .btn-secondary:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
   }
 
   .section-title {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
-    margin: 0 0 24px 0;
+    margin: 0 0 32px 0;
     color: #1a1a2e;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+    border-radius: 2px;
   }
 
   .features-section {
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
 
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
   }
 
   .feature-card {
     background: white;
     border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: 28px;
-    transition: all 0.2s ease;
+    border-radius: 20px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
   }
 
   .feature-card:hover {
     border-color: #d1d5db;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+  }
+
+  .feature-card:hover::before {
+    transform: scaleX(1);
   }
 
   .feature-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
   }
 
   .feature-icon.blue {
@@ -321,10 +393,14 @@ import { Button } from '@/components/ui/button'
     color: #f97316;
   }
 
+  .feature-card:hover .feature-icon {
+    transform: scale(1.1);
+  }
+
   .feature-card h3 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     color: #1a1a2e;
   }
 
@@ -336,84 +412,124 @@ import { Button } from '@/components/ui/button'
   }
 
   .categories-section {
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
 
   .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
   }
 
   .category-card {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 20px;
+    padding: 24px;
     background: white;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    border-radius: 16px;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.05), transparent);
+    transition: right 0.5s ease;
   }
 
   .category-card:hover {
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    border-color: #4f46e5;
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .category-card:hover::before {
+    right: 100%;
   }
 
   .category-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .category-card:hover .category-icon {
+    transform: scale(1.05);
   }
 
   .category-info h4 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    margin: 0 0 4px 0;
+    margin: 0 0 6px 0;
     color: #1a1a2e;
   }
 
   .category-info span {
-    font-size: 13px;
+    font-size: 14px;
     color: #6b7280;
   }
 
   .quickstart-section {
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
 
   .quickstart-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
   }
 
   .code-block {
     background: #1a1a2e;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .code-block:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   }
 
   .code-header {
     background: #252542;
-    padding: 12px 20px;
-    font-size: 13px;
+    padding: 16px 24px;
+    font-size: 14px;
     font-weight: 500;
     color: #a0a0b0;
     border-bottom: 1px solid #333350;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .code-header::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #f87171;
   }
 
   .code-block pre {
     margin: 0;
-    padding: 20px;
+    padding: 24px;
     overflow-x: auto;
   }
 
@@ -425,44 +541,54 @@ import { Button } from '@/components/ui/button'
   }
 
   .docs-section {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
   }
 
   .docs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
   }
 
   .doc-card {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
+    gap: 16px;
+    padding: 20px 24px;
     background: white;
     border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
     color: #374151;
     font-weight: 500;
     font-size: 14px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .doc-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 16px;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") no-repeat center;
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+    transition: all 0.3s ease;
   }
 
   .doc-card:hover {
-    border-color: #667eea;
-    color: #667eea;
+    border-color: #4f46e5;
+    color: #4f46e5;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+    transform: translateY(-2px);
   }
 
-  .doc-card svg:last-child {
-    margin-left: auto;
-    opacity: 0;
-    transition: all 0.2s ease;
-  }
-
-  .doc-card:hover svg:last-child {
+  .doc-card:hover::after {
     opacity: 1;
-    transform: translateX(4px);
+    transform: translateY(-50%) translateX(0);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -486,15 +612,24 @@ import { Button } from '@/components/ui/button'
     .doc-card {
       color: #d1d5db;
     }
+
+    .code-block {
+      background: #111827;
+    }
+
+    .code-header {
+      background: #1f2937;
+      border-bottom-color: #374151;
+    }
   }
 
   @media (max-width: 768px) {
     .hero-title {
-      font-size: 36px;
+      font-size: 48px;
     }
 
     .hero-description {
-      font-size: 16px;
+      font-size: 18px;
     }
 
     .hero-actions {
@@ -504,7 +639,18 @@ import { Button } from '@/components/ui/button'
 
     .btn-primary, .btn-secondary {
       width: 100%;
+      max-width: 300px;
       justify-content: center;
+    }
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .features-grid,
+    .categories-grid,
+    .docs-grid {
+      grid-template-columns: 1fr;
     }
   }
 `}</style>
