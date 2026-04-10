@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+"use strict"; function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } }
+
+
+var _chunk5BEOWWH4js = require('./chunk-5BEOWWH4.js');
+
+// src/cli.ts
+var _cac = require('cac');
+
+// package.json
+var version = "0.0.17";
+
+// src/cli.ts
+var cli = _cac.cac.call(void 0, "doubleshot-build");
+cli.option("-t, --type <type>", "Application type, 'node' or 'electron'", { default: "node" }).option("-c, --config <config>", "Specify config file").option("--disable-config", "Do not load config file").option("-e, --entry <file>", "Entry file for bundling").option("-o, --out <dir>", "Output directory").option("--tsconfig <file>", "TS config file").option("--external <names>", "External packages").option("--tsup-config <file>", "tsup config file").option("--preload <file>", "Electron preload file");
+cli.command("", "run in development mode").alias("dev").option("-m, --main <file>", "The main file of the application").option("--wait-for-renderer", "Wait for renderer process to be ready").option("--wait-timeout", "Wait for renderer process ready timeout").option("--renderer-url", "Renderer process url, support multiple").option("--build-only", "Only prebuild files and won't run the application").option("--run-only", "Skip prebuild and run the application").option("--debug", "Run in debug mode").action(async (options) => {
+  var _a;
+  const logger = _chunk5BEOWWH4js.createLogger.call(void 0, );
+  const { dev } = await Promise.resolve().then(() => _interopRequireWildcard(require("./main-5FZVEI3Y.js")));
+  try {
+    await dev({
+      main: options.main,
+      type: options.type,
+      configFile: options.disableConfig === true ? false : options.config,
+      entry: options.entry,
+      outDir: options.out,
+      tsconfig: options.tsconfig,
+      external: (_a = options.external) == null ? void 0 : _a.split(","),
+      tsupConfig: options.tsupConfig,
+      preload: options.preload,
+      waitForRenderer: options.waitForRenderer,
+      waitTimeout: options.waitTimeout,
+      rendererUrl: options.rendererUrl ? options.rendererUrl.includes(",") ? options.rendererUrl.split(",") : options.rendererUrl : void 0,
+      buildOnly: options.buildOnly,
+      runOnly: options.runOnly,
+      debug: options.debug
+    });
+  } catch (e) {
+    logger.error(_chunk5BEOWWH4js.TAG, e);
+    process.exit(1);
+  }
+});
+cli.command("build", "build for production").option("--electron-builder-config <file>", "Electron-Builder config file").action(async (options) => {
+  var _a;
+  const logger = _chunk5BEOWWH4js.createLogger.call(void 0, );
+  const { build } = await Promise.resolve().then(() => _interopRequireWildcard(require("./main-5FZVEI3Y.js")));
+  try {
+    await build({
+      electronBuilderConfig: options.electronBuilderConfig,
+      type: options.type,
+      configFile: options.disableConfig === true ? false : options.config,
+      entry: options.entry,
+      outDir: options.out,
+      tsconfig: options.tsconfig,
+      external: (_a = options.external) == null ? void 0 : _a.split(","),
+      tsupConfig: options.tsupConfig,
+      preload: options.preload
+    });
+  } catch (e) {
+    logger.error(_chunk5BEOWWH4js.TAG, e);
+    process.exit(1);
+  } finally {
+    process.exit();
+  }
+});
+cli.help();
+cli.version(version);
+cli.parse();

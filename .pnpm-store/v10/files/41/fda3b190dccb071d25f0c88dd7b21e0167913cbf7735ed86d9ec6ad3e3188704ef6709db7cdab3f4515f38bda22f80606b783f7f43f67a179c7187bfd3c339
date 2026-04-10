@@ -1,0 +1,70 @@
+import { createRequire } from "node:module";
+import path from "node:path";
+import resolve from "resolve";
+import { fileURLToPath } from "node:url";
+import { execaSync } from "@esm2cjs/execa";
+import globalDirs from "global-dirs";
+//#region \0rolldown/runtime.js
+var __require = /* @__PURE__ */ createRequire(import.meta.url);
+//#endregion
+//#region node_modules/.pnpm/tsdown@0.21.4_synckit@0.11.12_typescript@6.0.2/node_modules/tsdown/esm-shims.js
+const getFilename = () => fileURLToPath(import.meta.url);
+const getDirname = () => path.dirname(getFilename());
+const __dirname = /* @__PURE__ */ getDirname();
+//#endregion
+//#region src/utils.ts
+/**
+* @borrowed from: https://github.com/sindresorhus/is-path-inside/blob/main/index.js
+*/
+function isPathInside(childPath, parentPath) {
+	if (!parentPath) return false;
+	const relation = path.relative(parentPath, childPath);
+	return Boolean(relation && relation !== ".." && !relation.startsWith(`..${path.sep}`) && relation !== path.resolve(childPath));
+}
+function getGlobalPackagesDirs() {
+	const npmGlobalDir = globalDirs.npm.packages;
+	const yarnGlobalDir = globalDirs.yarn.packages;
+	let pnpmGlobalDir;
+	try {
+		const { stdout } = execaSync("pnpm", ["root", "-g"]);
+		pnpmGlobalDir = stdout.trim();
+	} catch {}
+	return {
+		npm: npmGlobalDir,
+		yarn: yarnGlobalDir,
+		pnpm: pnpmGlobalDir
+	};
+}
+function isInstalledGlobally(globalDirs) {
+	const gd = globalDirs || getGlobalPackagesDirs();
+	return isPathInside(__dirname, gd.npm) || isPathInside(__dirname, gd.yarn) || isPathInside(__dirname, gd.pnpm);
+}
+//#endregion
+//#region src/index.ts
+const cache = { globalDirs: void 0 };
+function addPackageJsonFile(name) {
+	if (name.endsWith("/package.json")) return name;
+	return path.join(name, "package.json");
+}
+function checkPackageExists(name) {
+	name = addPackageJsonFile(name);
+	try {
+		return !!resolve.sync(name, { preserveSymlinks: false });
+	} catch {}
+	if (!cache.globalDirs) cache.globalDirs = getGlobalPackagesDirs();
+	const globalDirs = cache.globalDirs;
+	if (isInstalledGlobally(globalDirs)) {
+		try {
+			if (globalDirs.yarn) return !!__require.resolve(path.join(globalDirs.yarn, name));
+		} catch {}
+		try {
+			if (globalDirs.pnpm) return !!__require.resolve(path.join(globalDirs.pnpm, name));
+		} catch {}
+		try {
+			if (globalDirs.npm) return !!__require.resolve(path.join(globalDirs.npm, name));
+		} catch {}
+	}
+	return false;
+}
+//#endregion
+export { checkPackageExists };

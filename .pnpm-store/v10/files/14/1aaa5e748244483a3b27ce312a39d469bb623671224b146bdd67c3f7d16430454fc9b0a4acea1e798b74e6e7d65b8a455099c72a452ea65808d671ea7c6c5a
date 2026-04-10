@@ -1,0 +1,26 @@
+{
+  "name": "@oxc-node/core-linux-x64-gnu",
+  "version": "0.0.35",
+  "cpu": [
+    "x64"
+  ],
+  "main": "oxc-node.linux-x64-gnu.node",
+  "files": [
+    "oxc-node.linux-x64-gnu.node"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oxc-project/oxc-node.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "os": [
+    "linux"
+  ],
+  "libc": [
+    "glibc"
+  ]
+}

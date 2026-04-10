@@ -1,0 +1,61 @@
+{
+  "name": "vue-input-otp",
+  "type": "module",
+  "version": "0.3.2",
+  "description": "",
+  "author": "Robert Soriano <sorianorobertc@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wobsoriano/vue-input-otp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wobsoriano/vue-input-otp.git"
+  },
+  "bugs": "https://github.com/wobsoriano/vue-input-otp/issues",
+  "keywords": [
+    "vue",
+    "otp",
+    "input",
+    "accessible"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "^12.8.2",
+    "reka-ui": "^2.6.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
+    "@changesets/cli": "^2.29.8",
+    "@vue/tsconfig": "^0.8.1",
+    "eslint": "^9.39.1",
+    "reka-ui": "^2.6.1",
+    "taze": "^19.9.2",
+    "tsdown": "^0.15.12",
+    "typescript": "^5.9.3",
+    "unplugin-vue": "^7.0.8",
+    "vue": "^3.5.25",
+    "vue-tsc": "^3.1.5"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "website": "pnpm --filter website dev",
+    "dev:website": "pnpm dev & pnpm website",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "release": "pnpm build && changeset publish",
+    "taze": "taze"
+  }
+}

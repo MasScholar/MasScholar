@@ -1,0 +1,465 @@
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } }
+
+
+
+var _chunk5BEOWWH4js = require('./chunk-5BEOWWH4.js');
+
+// src/main.ts
+var _child_process = require('child_process');
+var _fs = require('fs'); var _fs2 = _interopRequireDefault(_fs);
+var _perf_hooks = require('perf_hooks');
+var _checkpackageexists = require('check-package-exists');
+var _colorette = require('colorette');
+var _tsup = require('tsup');
+var _waiton = require('wait-on'); var _waiton2 = _interopRequireDefault(_waiton);
+
+// src/config.ts
+
+var _path2 = require('path'); var _path3 = _interopRequireDefault(_path2);
+var _bundlerequire = require('bundle-require');
+
+var _joycon = require('joycon'); var _joycon2 = _interopRequireDefault(_joycon);
+
+// src/utils.ts
+var _os = require('os'); var _os2 = _interopRequireDefault(_os);
+
+var isWindows = _os2.default.platform() === "win32";
+function slash(p) {
+  return p.replace(/\\/g, "/");
+}
+function normalizePath(id) {
+  return _path3.default.posix.normalize(isWindows ? slash(id) : id);
+}
+function resolvePath(_path, cwd = process.cwd()) {
+  if (_path3.default.isAbsolute(_path))
+    return _path;
+  return _path3.default.resolve(cwd, _path);
+}
+function arraify(target) {
+  return Array.isArray(target) ? target : [target];
+}
+function isObject(value) {
+  return Object.prototype.toString.call(value) === "[object Object]";
+}
+function merge(defaults, overrides) {
+  const merged = { ...defaults };
+  for (const key in overrides) {
+    const value = overrides[key];
+    if (value == null)
+      continue;
+    const existing = merged[key];
+    if (existing == null) {
+      merged[key] = value;
+      continue;
+    }
+    if (key === "entry") {
+      merged[key] = value || existing;
+      continue;
+    }
+    if (Array.isArray(existing) || Array.isArray(value)) {
+      merged[key] = [...arraify(_nullishCoalesce(existing, () => ( []))), ...arraify(_nullishCoalesce(value, () => ( [])))];
+      continue;
+    }
+    if (isObject(existing) && isObject(value)) {
+      merged[key] = merge(
+        existing,
+        value
+      );
+      continue;
+    }
+    merged[key] = value;
+  }
+  return merged;
+}
+
+// src/config.ts
+var logger = _chunk5BEOWWH4js.createLogger.call(void 0, );
+var joycon = new (0, _joycon2.default)();
+function defineConfig(config) {
+  return config;
+}
+async function resolveConfig(inlineConfig, cwd = process.cwd()) {
+  var _a, _b, _c, _d, _e, _f, _g;
+  const { configFile } = inlineConfig;
+  let configFilePath = null;
+  if (typeof configFile === "string") {
+    configFilePath = resolvePath(configFile, cwd);
+  } else if (configFile !== false) {
+    const configJoycon = new (0, _joycon2.default)();
+    configFilePath = await configJoycon.resolve({
+      files: [
+        `${_chunk5BEOWWH4js.CONFIG_FILE}.ts`,
+        `${_chunk5BEOWWH4js.CONFIG_FILE}.js`,
+        `${_chunk5BEOWWH4js.CONFIG_FILE}.cjs`,
+        `${_chunk5BEOWWH4js.CONFIG_FILE}.mjs`
+      ],
+      cwd,
+      stopDir: _path3.default.parse(cwd).root
+    });
+  }
+  let config = {};
+  if (configFilePath) {
+    logger.info(_chunk5BEOWWH4js.TAG, `Using config: ${_colorette.greenBright.call(void 0, configFilePath)}
+`);
+    const { mod: cfgMod } = await _bundlerequire.bundleRequire.call(void 0, {
+      filepath: configFilePath
+    });
+    config = cfgMod.default || cfgMod;
+  }
+  config = merge(config, inlineConfig);
+  const appType = config.type || "node";
+  const mainFile = await getMainFileAndCheck(cwd, config.main);
+  if (!config.entry)
+    throw new Error("entry file is required");
+  const tsupConfigArr = [await mergeTsupConfig(config, cwd)];
+  if (((_a = config.electron) == null ? void 0 : _a.preload) || inlineConfig.preload) {
+    let preloadConfig = { ...((_b = config.electron) == null ? void 0 : _b.preload) || {} };
+    if (inlineConfig.preload)
+      preloadConfig = { ...preloadConfig, entry: inlineConfig.preload };
+    if (preloadConfig.entry)
+      tsupConfigArr.push(await mergeTsupConfig(preloadConfig, cwd, tsupConfigArr[0]));
+    else
+      logger.warn(_chunk5BEOWWH4js.TAG, "Electron preload's entry is not specified, it will be ignored");
+  }
+  let electronBuilderConfig;
+  if (((_c = config.electron) == null ? void 0 : _c.build) || inlineConfig.electronBuilderConfig) {
+    const electronConfig = ((_d = config.electron) == null ? void 0 : _d.build) || { config: inlineConfig.electronBuilderConfig };
+    electronBuilderConfig = resolveElectronBuilderConfig(electronConfig, cwd);
+  }
+  const debugCfg = config.debugCfg || {};
+  debugCfg.enabled = !!(inlineConfig.debug || debugCfg.enabled);
+  if (debugCfg.enabled) {
+    tsupConfigArr.forEach((c) => {
+      c.sourcemap = debugCfg.sourcemapType === "file" ? true : "inline";
+    });
+  }
+  const buildOnly = !!(inlineConfig.buildOnly || config.buildOnly || debugCfg.buildOnly);
+  const runOnly = !!(inlineConfig.runOnly || config.runOnly);
+  return {
+    cwd,
+    type: appType,
+    main: mainFile,
+    args: config.args || [],
+    debugCfg,
+    buildOnly,
+    runOnly,
+    tsupConfigs: tsupConfigArr,
+    electron: {
+      build: electronBuilderConfig,
+      rendererUrl: inlineConfig.rendererUrl || ((_e = config.electron) == null ? void 0 : _e.rendererUrl),
+      waitForRenderer: inlineConfig.waitForRenderer || ((_f = config.electron) == null ? void 0 : _f.waitForRenderer),
+      waitTimeout: inlineConfig.waitTimeout || ((_g = config.electron) == null ? void 0 : _g.waitTimeout)
+    },
+    afterBuild: config.afterBuild
+  };
+}
+async function getMainFileAndCheck(cwd, defaultMainFile) {
+  let mainFile = defaultMainFile;
+  if (!mainFile) {
+    const packageJson = await joycon.load({
+      files: ["package.json"],
+      cwd,
+      stopDir: _path3.default.parse(cwd).root
+    });
+    const { path: filePath, data } = packageJson;
+    if (!filePath)
+      throw new Error("Main file is not specified, and no package.json found");
+    const { main } = data;
+    if (main)
+      mainFile = resolvePath(main, cwd);
+    else
+      throw new Error("Main file is not specified, package.json also missing main field ");
+  }
+  if (!/\.cjs$|\.js$/.test(mainFile))
+    throw new Error(`Main file must be .cjs or .js: ${mainFile}`);
+  return mainFile;
+}
+async function mergeTsupConfig(inputConfig, cwd, defaultConfig = {}) {
+  let extraCfg;
+  if (inputConfig.tsupConfig) {
+    if (typeof inputConfig.tsupConfig === "string") {
+      const tsupConfigPath = await joycon.resolve({
+        files: [inputConfig.tsupConfig],
+        cwd,
+        stopDir: _path3.default.parse(cwd).root
+      });
+      if (!tsupConfigPath) {
+        logger.warn(_chunk5BEOWWH4js.TAG, `tsup config file: ${inputConfig.tsupConfig} not found, ignored.
+`);
+      } else {
+        const { mod } = await _bundlerequire.bundleRequire.call(void 0, {
+          filepath: tsupConfigPath
+        });
+        extraCfg = mod.default || mod;
+      }
+    } else if (typeof inputConfig.tsupConfig === "object") {
+      extraCfg = inputConfig.tsupConfig;
+    }
+  }
+  extraCfg == null ? true : delete extraCfg.entry;
+  let tsupConfig = merge(defaultConfig, {
+    entry: inputConfig.entry ? Array.isArray(inputConfig.entry) ? inputConfig.entry : [inputConfig.entry] : void 0,
+    outDir: inputConfig.outDir,
+    tsconfig: inputConfig.tsconfig,
+    external: inputConfig.external,
+    config: false
+  });
+  tsupConfig = extraCfg ? { ...tsupConfig, ...extraCfg } : tsupConfig;
+  if (Array.isArray(tsupConfig.external) && tsupConfig.external.some((e) => typeof e === "string" && e.includes("package.json"))) {
+    const external = [];
+    for (const item of tsupConfig.external) {
+      if (typeof item !== "string" || !item.includes("package.json")) {
+        external.push(item);
+        continue;
+      }
+      const pkgJsonPath = resolvePath(item, cwd);
+      const { dependencies = {}, peerDependencies = {} } = JSON.parse(_fs2.default.readFileSync(pkgJsonPath, "utf8"));
+      for (const dep in { ...dependencies, ...peerDependencies })
+        external.push(dep);
+    }
+    tsupConfig.external = [...new Set(external)];
+  }
+  return tsupConfig;
+}
+function resolveElectronBuilderConfig(buildConfig, cwd) {
+  if (!buildConfig)
+    return { disabled: true };
+  const resolvedConfig = typeof buildConfig.config === "string" ? normalizePath(_path3.default.resolve(cwd, buildConfig.config)) : buildConfig.config;
+  return {
+    disabled: buildConfig.disabled === true,
+    config: resolvedConfig,
+    afterBuild: buildConfig.afterBuild,
+    cliOptions: buildConfig.cliOptions
+  };
+}
+
+// src/main.ts
+var logger2 = _chunk5BEOWWH4js.createLogger.call(void 0, );
+function exitMainProcess() {
+  logger2.warn(_chunk5BEOWWH4js.TAG, "Main process exit");
+  process.exit();
+}
+function runMainProcess(mainFile, electron, args) {
+  if (!_fs2.default.existsSync(mainFile))
+    throw new Error(`Main file not found: ${mainFile}`);
+  logger2.success(_chunk5BEOWWH4js.TAG, `\u26A1 Run main file: ${_colorette.greenBright.call(void 0, mainFile)}`);
+  const devArgs = electron ? [...args.electron || []] : [...args.node || []];
+  return _child_process.spawn.call(void 0, _nullishCoalesce(electron, () => ( "node")), [mainFile, ...devArgs], { stdio: "inherit" }).on("exit", exitMainProcess);
+}
+function createWaitOnOpts(url, timeout) {
+  if (url.startsWith("http://") || url.startsWith("https://"))
+    url = url.startsWith("http://") ? url.replace("http://", "http-get://") : url.replace("https://", "https-get://");
+  else if (url.startsWith("file://"))
+    url = url.replace("file://", "");
+  return {
+    resources: [url],
+    timeout: timeout || 5e3,
+    headers: {
+      accept: "*/*"
+    }
+  };
+}
+function doTsupBuild(opts, dsEnv = {}) {
+  const { env: optsEnv, ...restOpts } = opts;
+  const env = { ..._nullishCoalesce(optsEnv, () => ( {})), ...dsEnv };
+  return _tsup.build.call(void 0, {
+    silent: true,
+    env,
+    ...restOpts
+  });
+}
+function electronEnvCheck() {
+  if (!_checkpackageexists.checkPackageExists.call(void 0, "electron"))
+    throw new Error('"Application type: electron" is powered by "electron", please installed it via `npm i electron -D`');
+  return true;
+}
+function createDoubleShotEnv(type, config, mode) {
+  const dsEnv = {
+    DS_APP_TYPE: type,
+    DS_MODE: mode
+  };
+  if (type === "electron") {
+    if (config.electron.rendererUrl) {
+      if (Array.isArray(config.electron.rendererUrl)) {
+        for (let i = 0; i < config.electron.rendererUrl.length; i++) {
+          if (i === 0)
+            dsEnv.DS_RENDERER_URL = config.electron.rendererUrl[i];
+          else
+            dsEnv[`DS_RENDERER_URL_${i + 1}`] = config.electron.rendererUrl[i];
+        }
+      } else {
+        dsEnv.DS_RENDERER_URL = config.electron.rendererUrl;
+      }
+    }
+  }
+  const { debugCfg = {} } = config;
+  if (debugCfg.enabled && debugCfg.env) {
+    for (const key in debugCfg.env)
+      dsEnv[key] = debugCfg.env[key];
+  }
+  return dsEnv;
+}
+function createDoubleshotArgs(config) {
+  const { args = [], debugCfg = {} } = config;
+  const dsArgs = {
+    node: [],
+    electron: []
+  };
+  if (Array.isArray(args)) {
+    dsArgs.node = [...args];
+    dsArgs.electron = [...args];
+  } else {
+    dsArgs.node = [...args.node || []];
+    dsArgs.electron = [...args.electron || []];
+  }
+  if (debugCfg.enabled && debugCfg.args) {
+    if (Array.isArray(debugCfg.args)) {
+      dsArgs.node.push(...debugCfg.args);
+      dsArgs.electron.push(...debugCfg.args);
+    } else {
+      dsArgs.node.push(...debugCfg.args.node || []);
+      dsArgs.electron.push(...debugCfg.args.electron || []);
+    }
+  }
+  return dsArgs;
+}
+async function build(inlineConfig = {}, autoPack = true) {
+  const config = await resolveConfig(inlineConfig);
+  const {
+    type: appType = "node",
+    tsupConfigs = [],
+    afterBuild,
+    electron: electronConfig = {}
+  } = config;
+  const isElectron = appType === "electron";
+  const startTime = _perf_hooks.performance.now();
+  logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F4E6} Mode: ${_colorette.bgCyanBright.call(void 0, " Production ")}`);
+  logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F4A0} Application type: ${isElectron ? _colorette.bgCyan.call(void 0, " electron ") : _colorette.bgGreen.call(void 0, " node ")}`);
+  isElectron && electronEnvCheck();
+  const dsEnv = createDoubleShotEnv(appType, config, "production");
+  for (let i = 0; i < tsupConfigs.length; i++) {
+    const tsupConfig = tsupConfigs[i];
+    await doTsupBuild({ ...tsupConfig }, dsEnv);
+  }
+  const prebuildTime = _perf_hooks.performance.now() - startTime;
+  logger2.success(_chunk5BEOWWH4js.TAG, `\u2705 Prebuild succeeded! (${prebuildTime.toFixed(2)}ms)`);
+  await (afterBuild == null ? void 0 : afterBuild());
+  const pack = async () => {
+    var _a, _b;
+    if (isElectron && electronConfig.build && electronConfig.build.disabled !== true) {
+      if (!_checkpackageexists.checkPackageExists.call(void 0, "electron-builder"))
+        throw new Error('"electronConfig.build" is powered by "electron-builder", please installed it via `npm i electron-builder -D`');
+      const { build: electronBuilder } = await Promise.resolve().then(() => _interopRequireWildcard(require("electron-builder")));
+      logger2.info(_chunk5BEOWWH4js.TAG, "Start electron build...\n");
+      await electronBuilder({
+        config: electronConfig.build.config,
+        ...electronConfig.build.cliOptions || {}
+      });
+      await ((_b = (_a = electronConfig.build).afterBuild) == null ? void 0 : _b.call(_a));
+    }
+    const endTime = _perf_hooks.performance.now() - startTime;
+    logger2.success(`
+${_chunk5BEOWWH4js.TAG}`, `Build succeeded! (${endTime.toFixed(2)}ms)`);
+  };
+  if (autoPack)
+    await pack();
+  else
+    return pack;
+}
+async function dev(inlineConfig = {}) {
+  const config = await resolveConfig(inlineConfig);
+  const {
+    main: mainFile,
+    type: appType = "node",
+    buildOnly = false,
+    runOnly = false,
+    debugCfg = {},
+    tsupConfigs = [],
+    electron: electronConfig = {}
+  } = config;
+  const isDebug = !!debugCfg.enabled;
+  const isElectron = appType === "electron";
+  const startTime = _perf_hooks.performance.now();
+  logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F4BB} Mode: ${isDebug ? `${_colorette.bgYellowBright.call(void 0, " DEBUG ")} ` : ""}${_colorette.bgCyanBright.call(void 0, " Development ")}`);
+  logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F4A0} Application type: ${isElectron ? _colorette.bgCyan.call(void 0, " electron ") : _colorette.bgGreen.call(void 0, " node ")}`);
+  const dsEnv = createDoubleShotEnv(appType, config, "development");
+  const dsArgs = createDoubleshotArgs(config);
+  let electron;
+  if (isElectron && electronEnvCheck()) {
+    electron = await Promise.resolve().then(() => _interopRequireWildcard(require("electron")));
+    if (typeof electron === "object" && electron.default)
+      electron = electron.default;
+  }
+  let child;
+  process.on("exit", () => {
+    if (child) {
+      child.off("exit", exitMainProcess);
+      child.kill();
+    }
+  });
+  const prebuild = async () => {
+    for (let i = 0; i < tsupConfigs.length; i++) {
+      let isFirstBuild = true;
+      const _tsupConfig = tsupConfigs[i];
+      const { onSuccess: _onSuccess, watch: _watch, ...tsupOptions } = _tsupConfig;
+      const watch = _watch !== false;
+      if (!watch)
+        logger2.info(_chunk5BEOWWH4js.TAG, "\u26A0\uFE0F  Watch mode is disabled");
+      if (typeof _onSuccess === "string")
+        logger2.warn(_chunk5BEOWWH4js.TAG, '\u26A0\uFE0F  "onSuccess" only support a function, ignore it.');
+      const onSuccess = async () => {
+        if (!watch)
+          return;
+        if (typeof _onSuccess === "function")
+          await _onSuccess();
+        if (isFirstBuild) {
+          isFirstBuild = false;
+          return;
+        }
+        logger2.success(_chunk5BEOWWH4js.TAG, "Rebuild succeeded!");
+        if (buildOnly)
+          return;
+        if (child) {
+          child.off("exit", exitMainProcess);
+          child.kill();
+        }
+        child = runMainProcess(mainFile, electron, dsArgs);
+      };
+      await doTsupBuild({ onSuccess, watch, ...tsupOptions }, dsEnv);
+    }
+  };
+  if (runOnly) {
+    logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F684} ${_colorette.bgMagentaBright.call(void 0, " RUN ONLY ")} Prebuild will be skipped`);
+  } else {
+    await prebuild();
+    const prebuildTime = _perf_hooks.performance.now() - startTime;
+    logger2.success(_chunk5BEOWWH4js.TAG, `\u2705 Prebuild succeeded! (${prebuildTime.toFixed(2)}ms)`);
+  }
+  if (buildOnly) {
+    logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F6E0}\uFE0F ${_colorette.bgYellowBright.call(void 0, " BUILD ONLY ")} Application won't start`);
+    return;
+  }
+  if (isElectron && electronConfig.rendererUrl && electronConfig.waitForRenderer !== false) {
+    const waitFn = async (url) => {
+      if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("file://")) {
+        logger2.info(_chunk5BEOWWH4js.TAG, `\u{1F6A6} Wait for renderer: ${_colorette.cyan.call(void 0, url)}`);
+        await _waiton2.default.call(void 0, createWaitOnOpts(url, electronConfig.waitTimeout));
+      } else {
+        logger2.warn(_chunk5BEOWWH4js.TAG, `Invalid renderer url: ${url}, ignored.
+`);
+      }
+    };
+    if (!Array.isArray(electronConfig.rendererUrl))
+      await waitFn(electronConfig.rendererUrl);
+    else
+      await Promise.all(electronConfig.rendererUrl.map(waitFn));
+  }
+  child = runMainProcess(mainFile, electron, dsArgs);
+}
+
+
+
+
+
+
+exports.defineConfig = defineConfig; exports.resolveConfig = resolveConfig; exports.build = build; exports.dev = dev;

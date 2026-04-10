@@ -1,0 +1,23 @@
+import { InlineConfig, ElectronConfig } from '@doubleshot/builder';
+export { defineConfig } from '@doubleshot/builder';
+import { PluginOption } from 'vite';
+
+interface VitePluginDoubleshotConfig extends Omit<InlineConfig, 'rendererUrl' | 'electron'> {
+    /**
+     * Renderer process url on development mode
+     */
+    rendererUrl?: string;
+    /**
+     * Some configuration for electron
+     */
+    electron?: Omit<ElectronConfig, 'rendererUrl'> & {
+        rendererUrl?: string;
+    };
+    /**
+     * This hook can override the plugin config by Vite mode ('development' or 'production')
+     */
+    configureForMode: (userConfig: InlineConfig, mode: string) => (void | InlineConfig) | Promise<(void | InlineConfig)>;
+}
+declare function VitePluginDoubleshot(userConfig?: Partial<VitePluginDoubleshotConfig>): PluginOption[];
+
+export { VitePluginDoubleshot, type VitePluginDoubleshotConfig };
